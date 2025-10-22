@@ -1,0 +1,188 @@
+---
+title: "PROJET TUTORE M2"
+format: html
+editor: visual
+author: Tony LI - Saïd BENAISSA
+---
+
+# Projet tutoré : Mouvement brownien, ANOVA, phylogénie...
+
+## L'arbre phylogénétique
+
+Nous considérons un arbre phylogénétique représentant les relations évolutives entre quatre feuilles issues d’un ancêtre commun A0.
+
+```{r}
+library(ape)
+library(phytools)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+
+
+n_tips = 5  # nombre d'espèces terminales
+lambda = 1   # taux de spéciation (naissance)
+mu = 0       # taux d'extinction (0 = pur birth)
+
+tree= rphylo(n = n_tips, birth = lambda, death = mu)
+plot(tree, show.tip.label = TRUE, cex = 0.9, main = "Arbre simulé avec rphylo()")
+edgelabels()
+nodelabels()
+tiplabels()
+```
+
+```{r}
+simulate_bm <- function(t_e, N) {
+  # 1. choose a regular grid on [0,T] with step dt = t_e / N
+  dt <- t_e / N
+  time <- seq(0, t_e, dt)
+  # 2. define data frame and set W_0 = 0
+  traj <- data.frame(time = time, value = rep(NA, N+1))
+  traj$value[1] <- 0
+  # 3. simulate increments dW_n ~ N(0, dt) for 1 <= n <= N
+  dW <- rep(NA, N)
+  for (n in 1:N) {
+    dW[n] <- rnorm(1, mean = 0, sd = sqrt(dt))
+  }
+  # 4. write W_n = \sum_{i=1}^n dW_i for 1 <= n <= N in the dataframe
+  traj$value[-1] <- cumsum(dW)
+  # return dataframe
+  return(traj)
+}
+```
+
+```{r}
+## choose a time step
+dt <- 0.001
+## choose starting value
+mu <- 1.3
+## Create a data frame with the simulated trajectory
+dftree <- data.frame(value = numeric(0),       # position of the BM
+                     time = numeric(0),        # time elapsed since root
+                     edge = numeric(0))        # number of the edge of the tree
+## traverse the tree from edge to edge
+for (i in 1:nrow(tree$edge)) {
+  # simulate a BM starting at (0,0) on the current branch
+  t_branch <- tree$edge.length[i]
+  N_branch <- floor(t_branch / dt)
+  current_BM <- simulate_bm(t_branch, N_branch)
+  # find the parent edge of the starting node of the current edge
+  parent_edge <- which(tree$edge[i, 1] == tree$edge[, 2])
+  # case where current edge does not a parent edge
+  if (length(parent_edge) == 0) {
+    # add starting value mu
+    current_BM$value <- current_BM$value + mu
+  } else { # case where current edge do have a parent edge
+    # find last value on the parent branch
+    dfparent <- dftree[dftree$edge == parent_edge, ]
+    last_parent <- dfparent[nrow(dfparent), ]
+    # add last value of parent as starting value of the branch
+    current_BM$value <- current_BM$value + last_parent$value
+    current_BM$time <- current_BM$time + last_parent$time
+  }
+  # fill in the dataframe
+  dfbranch <-  data.frame(value = current_BM$value,
+                          time = current_BM$time,
+                          edge = i)
+  # update dftree
+  dftree <- rbind(dftree, dfbranch)
+}
+```
+
+```{r}
+p <- ggplot(dftree, aes(time, value, color = as.factor(edge))) +
+  geom_path(linewidth = 1)
+p
+```
+
+On peut décrire l’évolution d’un caractère quantitatif **T** (par ex. la taille d’une feuille) par un mouvement brownien au cours du temps évolutif **t** (dans le cas de la phylogénie).
+
+Mouvement brownien appliqué à l'évolution d'un caractère continu le long d'un arbre phylogénétique
+
+Le mouvement brownien est un processus stochastique fondamental servant de modèle pour décrire l’évolution aléatoire d’un caractère continu au cours du temps. Il s’agit du processus le plus simple vérifiant les propriétés suivantes : - il est **continu** presque sûrement ; - il possède des accroissements indépendants et stationnaires ; - chaque accroissement est gaussien de moyenne nulle.
+
+On appelle mouvement brownien standard $((B_t)_{t \ge 0})$ le processus stochastique tel que :
+
+\begin{cases}
+B_0 = 0,\\[4pt]
+B_t - B_s \sim \mathcal{N}(0, t-s), \quad \text{pour } 0 \le s < t,\\[4pt]
+\text{les accroissements sont indépendants.}
+\end{cases}
+
+## Covariance sous mouvement brownien sur un arbre
+
+On considère un arbre enraciné, où chaque feuille $i$ est reliée à la racine par un chemin de longueur $t_i$.\
+Pour deux feuilles $i$ et $j$, on note $t_{ij}$ la longueur du chemin commun depuis la racine jusqu’au MRCA (dernier ancêtre commun).
+
+Le caractère évolue le long de l’arbre selon un mouvement brownien, avec valeur moyenne $\mu$ à la racine.
+
+Modèle utilisé:
+
+On note la valeur du caractère au MRCA de $i$ et $j$ par $Z_{ij}$, alors :
+
+$$
+Z_{ij} \sim \mathcal{N}(\mu,\; \sigma^2 t_{ij})
+$$
+
+et les valeurs terminales $Y_i$ et $Y_j$ s’écrivent :
+
+$$
+Y_i \mid Z_{ij} \sim \mathcal{N}(Z_{ij},\; \sigma^2 (t_i - t_{ij}))
+$$
+
+$$
+Y_j \mid Z_{ij} \sim \mathcal{N}(Z_{ij},\; \sigma^2 (t_j - t_{ij}))
+$$
+
+Autrement dit, on peut écrire :
+
+$$
+Y_i = Z_{ij} + \varepsilon_i, \quad \varepsilon_i \sim \mathcal{N}(0,\; \sigma^2 (t_i - t_{ij}))
+$$
+
+$$
+Y_j = Z_{ij} + \varepsilon_j, \quad \varepsilon_j \sim \mathcal{N}(0,\; \sigma^2 (t_j - t_{ij}))
+$$Indépendance des composantes:
+
+Le mouvement brownien nous assure que :
+
+\- $Z_{ij}$ dépend uniquement de l’évolution du caractère sur les branches commune (jusqu’au MRCA),\
+- $\varepsilon_i$ dépend des accroissements après la séparation, sur la branche propre à $i$,\
+- $\varepsilon_j$ dépend des accroissements après la séparation, sur la branche propre à $j$.
+
+Comme ces ensembles de branches sont disjoints, on a :
+
+$$
+Z_{ij} \perp \varepsilon_i, \quad Z_{ij} \perp \varepsilon_j, \quad \varepsilon_i \perp \varepsilon_j
+$$Calcul de la covariance:
+
+On développe : $$
+\operatorname{Cov}(Y_i, Y_j)
+= \operatorname{Cov}(Z_{ij} + \varepsilon_i,\; Z_{ij} + \varepsilon_j)
+$$
+
+Par bilinéarité de la covariance : $$
+\operatorname{Cov}(Y_i, Y_j)
+= \operatorname{Cov}(Z_{ij}, Z_{ij})
++ \operatorname{Cov}(Z_{ij}, \varepsilon_j)
++ \operatorname{Cov}(\varepsilon_i, Z_{ij})
++ \operatorname{Cov}(\varepsilon_i, \varepsilon_j)
+$$
+
+Les trois derniers termes sont nuls par indépendance (vu en haut): $$
+\operatorname{Cov}(Z_{ij}, \varepsilon_j)
+= \operatorname{Cov}(\varepsilon_i, Z_{ij})
+= \operatorname{Cov}(\varepsilon_i, \varepsilon_j)
+= 0.
+$$
+
+Il reste donc : $$
+\operatorname{Cov}(Y_i, Y_j)
+= \operatorname{Var}(Z_{ij})
+= \sigma^2 t_{ij}.
+$$Conclusion
+
+$$
+\operatorname{Cov}(Y_i, Y_j) = \sigma^2\, t_{ij}
+$$
+
+Etape suivante formule beta etc
