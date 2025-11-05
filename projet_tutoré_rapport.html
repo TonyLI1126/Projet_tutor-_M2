@@ -330,6 +330,114 @@ Z_{ij} \perp \varepsilon_i, \quad Z_{ij} \perp \varepsilon_j, \quad \varepsilon_
 \]</span></p>
 <p>Etape suivante formule beta etc</p>
 </section>
+<section id="estimation-de-beta-dans-la-régression-phylogénétique" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-de-beta-dans-la-régression-phylogénétique">Estimation de <span class="math inline">\(\beta\)</span> dans la régression phylogénétique</h2>
+<p>On considère le modèle linéaire :</p>
+<p><span class="math display">\[
+Y = X\beta + \sigma \varepsilon,
+\qquad \varepsilon \sim \mathcal N(0,\,C)
+\]</span></p>
+<p>où <span class="math inline">\(Y\)</span> est le vecteur des observations, <span class="math inline">\(X\)</span> la matrice de design, <span class="math inline">\(\beta\)</span> le vecteur de paramètres, et <span class="math inline">\(C\)</span> la matrice de covariance phylogénétique.</p>
+<section id="cas-classique-erreurs-indépendantes" class="level3">
+<h3 class="anchored" data-anchor-id="cas-classique-erreurs-indépendantes">Cas classique : erreurs indépendantes</h3>
+<p>Si <span class="math inline">\(\varepsilon \sim \mathcal N(0, I)\)</span>, alors l’estimation par moindres carrés consiste à minimiser:</p>
+<p><span class="math display">\[
+Q(\beta)=\|Y - X\beta\|^2
+= (Y - X\beta)^\top (Y - X\beta).
+\]</span></p>
+<p>On développe terme à terme:</p>
+<p><span class="math display">\[
+Q(\beta) = Y^\top Y - 2\beta^\top X^\top Y + \beta^\top X^\top X\,\beta.
+\]</span></p>
+<p>On dérive par rapport à <span class="math inline">\(\beta\)</span> :</p>
+<p><span class="math display">\[
+\frac{\partial Q}{\partial \beta}
+= -2X^\top Y + 2X^\top X\,\beta.
+\]</span></p>
+<p>En annulant l’équation, on obtient :</p>
+<p><span class="math display">\[
+X^\top (Y - X\hat\beta) = 0
+\quad \Longrightarrow \quad
+X^\top X\,\hat\beta = X^\top Y.
+\]</span></p>
+<p>Donc l’estimateur dans le cas classique est :</p>
+<p><span class="math display">\[
+\hat\beta_{\text{OLS}} = (X^\top X)^{-1} X^\top Y.
+\]</span></p>
+</section>
+<section id="cas-phylogénétique-erreurs-corrélées" class="level3">
+<h3 class="anchored" data-anchor-id="cas-phylogénétique-erreurs-corrélées">Cas phylogénétique : erreurs corrélées</h3>
+<p>Maintenant, les erreurs suivent <span class="math inline">\(\varepsilon \sim \mathcal N(0,\,C)\)</span>, donc les observations sont corrélées mais on connait <span class="math inline">\(C\)</span> grâce à l’arbre, qui est la covariance phylogénétique sous MB.</p>
+<p>On utilise la décomposition de Cholesky :</p>
+<p><span class="math display">\[
+C = LL^\top.
+\]</span></p>
+<p>On remplace et réécrit en fonction des <span class="math inline">\(L\)</span> :</p>
+<p><span class="math display">\[
+\tilde Y = L^{-1}Y,
+\qquad
+\tilde X = L^{-1}X,
+\qquad
+\tilde\varepsilon = L^{-1}\varepsilon.
+\]</span></p>
+<p>Alors:</p>
+<p><span class="math display">\[
+\tilde Y = \tilde X\beta + \sigma\tilde\varepsilon,
+\qquad
+\tilde\varepsilon \sim \mathcal N(0, I).
+\]</span></p>
+<p>On a donc un modèle linéaire classique sur les données transformées et on peut appliquer les mêmes méthodes que dans le cas classiques.</p>
+<section id="estimateurs-de-beta-dans-le-cas-phylogénétique" class="level4">
+<h4 class="anchored" data-anchor-id="estimateurs-de-beta-dans-le-cas-phylogénétique">Estimateurs de <span class="math inline">\(\beta\)</span> dans le cas phylogénétique</h4>
+<p>On minimise:</p>
+<p><span class="math display">\[
+\tilde Q(\beta)
+=\|\tilde Y - \tilde X\beta\|^2
+=(\tilde Y - \tilde X\beta)^\top(\tilde Y - \tilde X\beta).
+\]</span></p>
+<p>On développe terme à terme:</p>
+<p><span class="math display">\[
+\tilde Q(\beta)
+= \tilde Y^\top \tilde Y
+- 2\,\beta^\top \tilde X^\top \tilde Y
++ \beta^\top \tilde X^\top \tilde X\,\beta.
+\]</span></p>
+<p>On dérive par rapport à <span class="math inline">\(\beta\)</span> :</p>
+<p><span class="math display">\[
+\frac{\partial \tilde Q}{\partial \beta}
+= -2\,\tilde X^\top \tilde Y + 2\,\tilde X^\top \tilde X\,\beta.
+\]</span></p>
+<p>On cherche à annuler cette équation et on trouve la forme:</p>
+<p><span class="math display">\[
+\tilde X^\top \tilde X\,\hat\beta
+= \tilde X^\top \tilde Y.
+\]</span></p>
+<p>Donc en isolant <span class="math inline">\(\beta\)</span> :</p>
+<p><span class="math display">\[
+\hat\beta
+= (\tilde X^\top \tilde X)^{-1} \tilde X^\top \tilde Y.
+\]</span></p>
+<p>Avec <span class="math inline">\(\tilde X = L^{-1}X\)</span> et <span class="math inline">\(\tilde Y = L^{-1}Y\)</span> , on remplace:</p>
+<p><span class="math display">\[
+\tilde X^\top \tilde X
+= X^\top (L^{-1})^\top L^{-1} X
+= X^\top C^{-1} X,
+\qquad
+\tilde X^\top \tilde Y
+= X^\top (L^{-1})^\top L^{-1} Y
+= X^\top C^{-1} Y,
+\]</span></p>
+<p>puisque <span class="math inline">\((L^{-1})^\top L^{-1}=(LL^\top)^{-1}=C^{-1}\)</span> :</p>
+<p>On a finalement:</p>
+<p><span class="math display">\[
+\boxed{
+\hat\beta = (X^\top C^{-1}X)^{-1} X^\top C^{-1}Y
+}
+\]</span></p>
+<p>On a l’estimateur de <span class="math inline">\(\beta\)</span> qui est celui des moindres carrés généralisés</p>
+</section>
+</section>
+</section>
 </section>
 
 </main>

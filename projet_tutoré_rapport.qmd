@@ -186,3 +186,144 @@ $$
 $$
 
 Etape suivante formule beta etc
+
+## Estimation de $\beta$ dans la régression phylogénétique
+
+On considère le modèle linéaire :
+
+$$
+Y = X\beta + \sigma \varepsilon, 
+\qquad \varepsilon \sim \mathcal N(0,\,C)
+$$
+
+où $Y$ est le vecteur des observations, $X$ la matrice de design, $\beta$ le vecteur de paramètres, et $C$ la matrice de covariance phylogénétique.
+
+### Cas classique : erreurs indépendantes
+
+Si $\varepsilon \sim \mathcal N(0, I)$, alors l'estimation par moindres carrés consiste à minimiser:
+
+$$
+Q(\beta)=\|Y - X\beta\|^2
+= (Y - X\beta)^\top (Y - X\beta).
+$$
+
+On développe terme à terme:
+
+$$
+Q(\beta) = Y^\top Y - 2\beta^\top X^\top Y + \beta^\top X^\top X\,\beta.
+$$
+
+On dérive par rapport à $\beta$ :
+
+$$
+\frac{\partial Q}{\partial \beta}
+= -2X^\top Y + 2X^\top X\,\beta.
+$$
+
+En annulant l'équation, on obtient :
+
+$$
+X^\top (Y - X\hat\beta) = 0
+\quad \Longrightarrow \quad
+X^\top X\,\hat\beta = X^\top Y.
+$$
+
+Donc l'estimateur dans le cas classique est :
+
+$$
+\hat\beta_{\text{OLS}} = (X^\top X)^{-1} X^\top Y.
+$$
+
+### Cas phylogénétique : erreurs corrélées
+
+Maintenant, les erreurs suivent $\varepsilon \sim \mathcal N(0,\,C)$, donc les observations sont corrélées mais on connait $C$ grâce à l'arbre, qui est la covariance phylogénétique sous MB.
+
+On utilise la décomposition de Cholesky :
+
+$$
+C = LL^\top.
+$$
+
+On remplace et réécrit en fonction des $L$ :
+
+$$
+\tilde Y = L^{-1}Y, 
+\qquad 
+\tilde X = L^{-1}X, 
+\qquad 
+\tilde\varepsilon = L^{-1}\varepsilon.
+$$
+
+Alors:
+
+$$
+\tilde Y = \tilde X\beta + \sigma\tilde\varepsilon,
+\qquad
+\tilde\varepsilon \sim \mathcal N(0, I).
+$$
+
+On a donc un modèle linéaire classique sur les données transformées et on peut appliquer les mêmes méthodes que dans le cas classiques.
+
+#### Estimateurs de $\beta$ dans le cas phylogénétique
+
+On minimise:
+
+$$
+\tilde Q(\beta)
+=\|\tilde Y - \tilde X\beta\|^2
+=(\tilde Y - \tilde X\beta)^\top(\tilde Y - \tilde X\beta).
+$$
+
+On développe terme à terme:
+
+$$
+\tilde Q(\beta)
+= \tilde Y^\top \tilde Y
+- 2\,\beta^\top \tilde X^\top \tilde Y
++ \beta^\top \tilde X^\top \tilde X\,\beta.
+$$
+
+On dérive par rapport à $\beta$ :
+
+$$
+\frac{\partial \tilde Q}{\partial \beta}
+= -2\,\tilde X^\top \tilde Y + 2\,\tilde X^\top \tilde X\,\beta.
+$$
+
+On cherche à annuler cette équation et on trouve la forme:
+
+$$
+\tilde X^\top \tilde X\,\hat\beta
+= \tilde X^\top \tilde Y.
+$$
+
+Donc en isolant $\beta$ :
+
+$$
+\hat\beta
+= (\tilde X^\top \tilde X)^{-1} \tilde X^\top \tilde Y.
+$$
+
+Avec $\tilde X = L^{-1}X$ et $\tilde Y = L^{-1}Y$ , on remplace:
+
+$$
+\tilde X^\top \tilde X
+= X^\top (L^{-1})^\top L^{-1} X
+= X^\top C^{-1} X,
+\qquad
+\tilde X^\top \tilde Y
+= X^\top (L^{-1})^\top L^{-1} Y
+= X^\top C^{-1} Y,
+$$
+
+puisque $(L^{-1})^\top L^{-1}=(LL^\top)^{-1}=C^{-1}$ :
+
+On a finalement:
+
+$$
+\boxed{
+\hat\beta = (X^\top C^{-1}X)^{-1} X^\top C^{-1}Y
+}
+$$
+
+On a l'estimateur de $\beta$ qui est celui des moindres carrés généralisés
