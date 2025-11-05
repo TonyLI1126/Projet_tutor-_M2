@@ -438,6 +438,79 @@ C = LL^\top.
 </section>
 </section>
 </section>
+<section id="estimation-de-sigma2-dans-la-régression-phylogénétique" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-de-sigma2-dans-la-régression-phylogénétique">Estimation de <span class="math inline">\(\sigma^2\)</span> dans la régression phylogénétique</h2>
+<p>On considère le modèle linéaire :</p>
+<p><span class="math display">\[
+Y = X\beta + \sigma \varepsilon, \qquad \varepsilon \sim \mathcal N(0,\,C)
+\]</span></p>
+<p>où <span class="math inline">\(Y\)</span> est le vecteur des observations, <span class="math inline">\(X\)</span> la matrice de design, <span class="math inline">\(\beta\)</span> le vecteur de paramètres, et <span class="math inline">\(C\)</span> la matrice de covariance phylogénétique.</p>
+<section id="cas-classique-erreurs-indépendantes-1" class="level3">
+<h3 class="anchored" data-anchor-id="cas-classique-erreurs-indépendantes-1">Cas classique : erreurs indépendantes</h3>
+<p>Dans le cas <span class="math inline">\(\varepsilon \sim \mathcal N(0,I)\)</span>, on définit le résidu:</p>
+<p><span class="math display">\[
+\hat r = Y - X\hat\beta_{\text{OLS}},
+\qquad \hat\beta_{\text{OLS}} = (X^\top X)^{-1}X^\top Y.
+\]</span></p>
+<p>L’estimateur non biaisé de <span class="math inline">\(\sigma^2\)</span> est :</p>
+<p><span class="math display">\[
+\boxed{\ \hat\sigma^2_{\text{OLS}}
+= \frac{1}{n-p}\,\|Y - X\hat\beta_{\text{OLS}}\|^2
+= \frac{1}{n-p}\,(Y-X\hat\beta_{\text{OLS}})^\top (Y-X\hat\beta_{\text{OLS}})\ }.
+\]</span></p>
+</section>
+<section id="cas-phylogénétique-erreurs-corrélées-1" class="level3">
+<h3 class="anchored" data-anchor-id="cas-phylogénétique-erreurs-corrélées-1">Cas phylogénétique : erreurs corrélées</h3>
+<p>Ici <span class="math inline">\(\varepsilon \sim \mathcal N(0,C)\)</span>.<br>
+On note la décomposition de Cholesky :</p>
+<p><span class="math display">\[
+C = LL^\top.
+\]</span></p>
+<p>Comme pour l’estimation de <span class="math inline">\(\beta\)</span> on a donc :</p>
+<p><span class="math display">\[
+\tilde Y = L^{-1}Y, \qquad \tilde X = L^{-1}X, \qquad \tilde\varepsilon = L^{-1}\varepsilon \sim \mathcal N(0,I).
+\]</span></p>
+<p>Le modèle devient donc:</p>
+<p><span class="math display">\[
+\tilde Y = \tilde X\beta + \sigma\tilde\varepsilon.
+\]</span></p>
+<p>et l’estimateur de <span class="math inline">\(\beta\)</span> GLS devient:</p>
+<p><span class="math display">\[
+\hat\beta = (X^\top C^{-1}X)^{-1}X^\top C^{-1}Y.
+\]</span></p>
+<p>On définit les résidus :</p>
+<p><span class="math display">\[
+\hat r = Y - X\hat\beta,
+\qquad
+\tilde r = \tilde Y - \tilde X \hat\beta = L^{-1}\hat r.
+\]</span></p>
+<p>Alors :</p>
+<p><span class="math display">\[
+\hat\sigma^2
+= \frac{1}{n-p}\|\tilde r\|^2
+= \frac{1}{n-p}\,(\tilde Y - \tilde X\hat\beta)^\top(\tilde Y - \tilde X\hat\beta).
+\]</span></p>
+<p>En remplaçant <span class="math inline">\(\tilde r = L^{-1}\hat r\)</span> :</p>
+<p><span class="math display">\[
+\begin{aligned}
+\|\tilde r\|^2
+&amp;= (L^{-1}\hat r)^\top(L^{-1}\hat r) \\
+&amp;= \hat r^\top (L^{-1})^\top L^{-1} \hat r \\
+&amp;= \hat r^\top (LL^\top)^{-1} \hat r \\
+&amp;= \hat r^\top C^{-1} \hat r
+= (Y - X\hat\beta)^\top C^{-1}(Y - X\hat\beta).
+\end{aligned}
+\]</span></p>
+<p>et au final on a :</p>
+<p><span class="math display">\[
+\boxed{
+\hat\sigma^2
+= \frac{1}{n-p}(Y - X\hat\beta)^\top C^{-1}(Y - X\hat\beta)
+= \frac{1}{n-p}\|\tilde Y - \tilde X\hat\beta\|^2
+}.
+\]</span></p>
+</section>
+</section>
 </section>
 
 </main>

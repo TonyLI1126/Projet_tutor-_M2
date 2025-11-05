@@ -327,3 +327,96 @@ $$
 $$
 
 On a l'estimateur de $\beta$ qui est celui des moindres carrés généralisés
+
+## Estimation de $\sigma^2$ dans la régression phylogénétique
+
+On considère le modèle linéaire :
+
+$$
+Y = X\beta + \sigma \varepsilon, \qquad \varepsilon \sim \mathcal N(0,\,C)
+$$
+
+où $Y$ est le vecteur des observations, $X$ la matrice de design, $\beta$ le vecteur de paramètres, et $C$ la matrice de covariance phylogénétique.
+
+### Cas classique : erreurs indépendantes
+
+Dans le cas $\varepsilon \sim \mathcal N(0,I)$, on définit le résidu:
+
+$$
+\hat r = Y - X\hat\beta_{\text{OLS}},
+\qquad \hat\beta_{\text{OLS}} = (X^\top X)^{-1}X^\top Y.
+$$
+
+L’estimateur non biaisé de $\sigma^2$ est :
+
+$$
+\boxed{\ \hat\sigma^2_{\text{OLS}}
+= \frac{1}{n-p}\,\|Y - X\hat\beta_{\text{OLS}}\|^2
+= \frac{1}{n-p}\,(Y-X\hat\beta_{\text{OLS}})^\top (Y-X\hat\beta_{\text{OLS}})\ }.
+$$
+
+### Cas phylogénétique : erreurs corrélées
+
+Ici $\varepsilon \sim \mathcal N(0,C)$.\
+On note la décomposition de Cholesky :
+
+$$
+C = LL^\top.
+$$
+
+Comme pour l'estimation de $\beta$ on a donc :
+
+$$
+\tilde Y = L^{-1}Y, \qquad \tilde X = L^{-1}X, \qquad \tilde\varepsilon = L^{-1}\varepsilon \sim \mathcal N(0,I).
+$$
+
+Le modèle devient donc:
+
+$$
+\tilde Y = \tilde X\beta + \sigma\tilde\varepsilon.
+$$
+
+et l'estimateur de $\beta$ GLS devient:
+
+$$
+\hat\beta = (X^\top C^{-1}X)^{-1}X^\top C^{-1}Y.
+$$
+
+On définit les résidus :
+
+$$
+\hat r = Y - X\hat\beta, 
+\qquad 
+\tilde r = \tilde Y - \tilde X \hat\beta = L^{-1}\hat r.
+$$
+
+Alors :
+
+$$
+\hat\sigma^2
+= \frac{1}{n-p}\|\tilde r\|^2
+= \frac{1}{n-p}\,(\tilde Y - \tilde X\hat\beta)^\top(\tilde Y - \tilde X\hat\beta).
+$$
+
+En remplaçant $\tilde r = L^{-1}\hat r$ :
+
+$$
+\begin{aligned}
+\|\tilde r\|^2
+&= (L^{-1}\hat r)^\top(L^{-1}\hat r) \\
+&= \hat r^\top (L^{-1})^\top L^{-1} \hat r \\
+&= \hat r^\top (LL^\top)^{-1} \hat r \\
+&= \hat r^\top C^{-1} \hat r
+= (Y - X\hat\beta)^\top C^{-1}(Y - X\hat\beta).
+\end{aligned}
+$$
+
+et au final on a :
+
+$$
+\boxed{
+\hat\sigma^2
+= \frac{1}{n-p}(Y - X\hat\beta)^\top C^{-1}(Y - X\hat\beta)
+= \frac{1}{n-p}\|\tilde Y - \tilde X\hat\beta\|^2
+}.
+$$
