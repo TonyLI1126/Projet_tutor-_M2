@@ -771,3 +771,174 @@ cat("phylolm beta1  :", abs(B[2] - mean(resphylo[,2])), "\n")
 ```
 
 Quand les erreurs suivent un MB sur l'arbre (présence de structure phylogénétique) ==\> modèle phylolm qui est meilleur (correct).
+
+## ANOVA classique
+
+On considère (K) groupes, chacun avec (n_k) observations.
+
+Le modèle classique est :
+
+$$
+y_{ki} = \mu_k + \sigma \varepsilon_{ik},
+\qquad
+\varepsilon_{ik} \sim \mathcal N(0,1).
+$$
+
+L’hypothèse nulle d’ANOVA est :
+
+$$
+H_0 : \mu_1 = \mu_2 = \cdots = \mu_K
+\qquad \text{vs} \qquad
+H_1 : \exists k,\ell \; \mu_k \ne \mu_\ell.
+$$
+
+En prenant le groupe 1 comme référence, on réécrit :
+
+$$
+y_{ki} = \mu_1 + \beta_k + \sigma \varepsilon_{ik},
+\qquad
+\beta_1 = 0.
+$$
+
+En notation matricielle :
+
+$$
+y = X\beta + \sigma \varepsilon,
+\qquad
+\varepsilon \sim \mathcal N(0, I_n).
+$$
+
+La statistique de Fisher classique est :
+
+$$
+F = 
+\frac{\| \hat y - \bar y \|^2 / (K - 1)}
+     {\| y - \hat y \|^2 / (n - K)}
+\sim F_{K-1,\; n-K} \quad \text{sous } H_0.
+$$
+
+## ANOVA phylogénétique
+
+Les données sont corrélées selon un arbre phylogénétique.\
+On suppose maintenant :
+
+$$
+E \sim \mathcal N(0, C),
+$$
+
+où (V) est la matrice de covariance phylogénétique (ex : Brownian Motion).
+
+Le modèle devient :
+
+$$
+y = X\beta + \sigma E,
+\qquad
+E \sim \mathcal N(0, C).
+$$
+
+Donc :
+
+$$
+y \sim \mathcal N(X\beta, \sigma^2 C).
+$$
+
+L’estimateur des moindres carrés généralisés (GLS) est :
+
+$$
+\hat\beta_{GLS}
+=
+\big( X^\top C^{-1} X \big)^{-1}
+X^\top C^{-1} y.
+$$
+
+On teste toujours :
+
+$$
+H_0 : \beta_2 = \cdots = \beta_K = 0.
+$$
+
+La statistique F phylogénétique est :
+
+$$
+F =
+\frac{\| \hat y - \bar y \|_{C^{-1}}^2 / (K - 1)}
+     {\| y - \hat y \|_{C^{-1}}^2 / (n - K)},
+$$
+
+où :
+
+$$
+\| z \|_{C^{-1}}^2 = z^\top C^{-1} z.
+$$
+
+Sous l’hypothèse nulle :
+
+$$
+F \sim F_{K-1,\; n-K}.
+$$
+
+Maintenant on va essayer de comparer l'anova classique et l'anova phylogénétique sur des données phylogénétique on devrait normalement avoir une erreur de premiere espece supérieur a 0.05 pour le modele d'anova classique car ce n'est pas le modele adéquate aux données phylogénétique.
+
+Comparaison ANOVA classique vs phylogénétique
+
+Nous illustrons maintenant la différence entre une ANOVA classique (qui suppose des erreurs indépendantes) et une ANOVA phylogénétique adaptée aux données corrélées selon un arbre.
+
+Taux d'erreur de première espèce sous $H_0$ (pas de différence entre groupes):
+
+On simule un arbre avec 8 feuilles et deux groupes de taille égale. Sous l'hypothèse nulle $\delta = 0$ on calcule la proportion de rejets de $H_0$ pour le modèle classique et pour le modèle phylogénétique.
+
+```{r}
+set.seed(123)
+
+n = 8                # 8 feuilles
+B0 = 2               # moyenne commune sous H0
+sigma2 = 1           # variance du BM
+nsim = 500           # nombre de simulations
+
+rej_lm = 0           # compteur des rejets H0 sous lm
+rej_phylo = 0        # pour comparaison
+
+for(sim in 1:nsim){
+
+  # 1) Simuler un arbre avec 8 feuilles
+  tree = rtree(n)
+
+  # 2) Bruit phylogénétique (BM)
+  eps = rTrait(
+    n = 1, phy = tree, model = "BM",
+    parameters = list(ancestral.state = 0, sigma2 = sigma2)
+  )
+
+  # 3) On définit 2 groupes (4 premiere et 4 dernieres)
+  group = factor(c(rep(1,4), rep(2,4)))
+  names(group) = tree$tip.label
+
+  # 4) Modèle sous H0 : mêmes moyennes
+  y = B0 + eps
+  names(y) = tree$tip.label
+
+  # 5) ANOVA classique (lm)
+  fit_lm = lm(y ~ group)
+  p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
+
+  if(p_lm < 0.05) rej_lm <- rej_lm + 1
+
+  # 6) ANOVA phylogénétique (phylolm)
+  dat = data.frame(y = y, group = group)
+  fit_phylo = phylolm(y ~ group, phy = tree, data = dat)
+  p_phylo = summary(fit_phylo)$coefficients["group2","p.value"]
+
+  if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
+}
+
+cat("\n TAUX D’ERREUR DE TYPE I\n")
+cat("ANOVA classique (lm)      :", rej_lm/nsim*100, "%\n")
+cat("ANOVA phylogénétique      :", rej_phylo/nsim*100, "%\n")
+```
+
+\
+nous avons ici une erreur de premiere espece pour le modele classique a 18.2 % qui est bien supérieure a 0.05 et qui montre que ce modele n'est pas adapter pour les données de ce type alors que l'erreur de premiere espece de l'anova phylogénétique bien proche de 0.05 comme attendue
+
+Puissance quand $H_1$ est vraie (effet de groupe non nul)
+
+On fixe maintenant un écart $\delta = 1$ entre les deux groupes pour mesurer la puissance des deux approches.
