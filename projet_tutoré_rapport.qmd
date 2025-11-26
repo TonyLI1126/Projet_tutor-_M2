@@ -420,3 +420,354 @@ $$
 = \frac{1}{n-p}\|\tilde Y - \tilde X\hat\beta\|^2
 }.
 $$
+
+------------------------------------------------------------------------
+
+```{r}
+library(ape)
+library(phylolm)
+```
+
+1)  étape test des formules
+
+on crée un modele et on estime d'abord béta et sigma \^2 avec le package
+
+```{r}
+set.seed(3)
+n = 1000
+x = rnorm(n,3,5)
+e = rnorm(n,0,1)
+y = 2 + 4*x + e
+tree <- rphylo(n, 0.5, 0.1)
+names(y) <- names(x) <- tree$tip.label
+fit_phylo <- phylolm(y ~ x, phy = tree)
+summary(fit_phylo)
+
+```
+
+on estime le béta avec la formule
+
+```{r}
+X = cbind(1, x)
+
+c = ape::vcv(tree)
+betahat = solve(t(X)%*%solve(c)%*%X)%*%t(X)%*%solve(c)%*%y
+betahat
+betafor = betahat[2]
+
+```
+
+```{r}
+ betatpackage = fit_phylo$coefficients[2]
+abs(betafor - betatpackage)
+all.equal(betafor,betatpackage , check.attributes = FALSE)
+
+```
+
+```{r}
+microbenchmark(phylolm(y ~ x, phy = tree))
+```
+
+```{r}
+microbenchmark(betahat)
+```
+
+on compare le beta avec le coefficient du package et on voit que c'est le meme car leur différence est tres proche de 0
+
+estimation de sigma\^2 par la formule
+
+```{r}
+p = ncol(X)
+
+rownames(X) = names(y)   
+r = y - X %*% betahat
+sigma2hat <- as.numeric( t(r) %*% solve(c) %*% r / (n-p) )
+sigma2hat
+
+
+```
+
+```{r}
+sigmapack = fit_phylo$sigma2
+abs(sigma2hat*((n-p)/n) - sigmapack)
+
+```
+
+on voit une différence un peu plus significative pour le sigma\^2 entre celui du package et celui de la formule meme si la différence reste tres petite
+
+phylolm ==\> estimateur de vraisemblance qui est biaisé
+
+maintenant on construit les intervalles de confiance pour beta et sigma
+
+on commence par celui de beta
+
+```{r}
+alpha = 0.05
+Vb = sigma2hat * solve(t(X) %*% solve(c) %*% X)
+se = sqrt(diag(Vb))
+lowerbeta = betahat - qt(1-alpha/2, df = n-p) * se
+upperbeta = betahat + qt(1-alpha/2, df = n-p) * se
+icbeta = cbind(lowerbeta, upperbeta)
+icbeta
+confint(fit_phylo)
+```
+
+on voit que l'intervalle de confiance contient le beta estimé
+
+```{r}
+
+
+lowersigma <- ((n-p) * sigma2hat) / qchisq(1 - alpha/2, (n-p))
+uppersigma <- ((n-p) * sigma2hat) / qchisq(alpha/2, (n-p))
+
+icsigma = cbind(lowersigma , uppersigma)
+icsigma
+
+
+```
+
+on voit que cette intervalle contient sigma
+
+maintenant on test si l'intervalle est bien a 95% de confiance on test sur 100 intervalle il doit avoir environ 95 intervalle qui contient le vrai beta
+
+```{r}
+
+betat = c(3,1.2)
+sigmat = 2
+m = 50
+alpha = 0.05
+coverage = 0
+
+for(i in 1:100){
+
+  # arbre phylogénétique simulé
+  tree <- rphylo(m, 1, 1)
+
+  # simulateur covariable
+  x = rnorm(m)
+  X = cbind(1, x)
+  rownames(X) <- tree$tip.label
+
+  # bruit brownien (phylogénétique)
+  eps = rTrait(
+    n = 1,
+    phy = tree,
+    model = "BM",
+    parameters = list(ancestral.state = 0, sigma2 = sigmat)
+  )
+
+  # variable réponse
+  y = X %*% betat + eps
+  names(y) = tree$tip.label
+
+  # données pour phylolm
+  dat = data.frame(y = y, x = x)
+  rownames(dat) = tree$tip.label
+
+  # estimation complète via phylolm
+  fit = phylolm(y ~ x, phy = tree, data = dat)
+
+  # récupère beta chapeau et erreur standard
+  bhat   = coef(fit)[2]
+  se     = summary(fit)$coefficients[2,2]
+
+  # intervalle de confiance
+  lowerbeta = bhat - qt(1-alpha/2, df = m-2) * se
+  upperbeta = bhat + qt(1-alpha/2, df = m-2) * se
+
+  # couverture
+  if (betat[2] >= lowerbeta && betat[2] <= upperbeta) {
+    coverage = coverage + 1
+  }
+}
+
+coverage
+
+```
+
+on utilise la fonction rtraitcont pour simuler le vecteur des feuilles sans les trajectoire
+
+```{r}
+?rTraitCont
+set.seed(1)
+n =20
+tree = rphylo(n, birth = 1, death = 0.1)
+
+feuilles = rTraitCont(phy = tree, model = "BM",sigma = sqrt(3),   
+  ancestor = FALSE    
+)
+
+feuilles
+
+```
+
+étude de simulation on réalise une étude de simulation ou on compare l'estimation de béta pour des donnée classique entre la régression classique et la régression phylogénétique on doit normalement s'attendre a ce que la régression classique estime mieux le béta que la régression phylogénétique
+
+```{r}
+
+set.seed(123)
+rmse <- function(est, true) sqrt(mean((est - true)^2))
+
+
+n = 50
+B = c(1, 5)               # beta0, beta1
+sigma2 = 4
+Nsim = 100
+
+# stocker les beta0 et beta1
+reslm      = matrix(0, Nsim, 2)
+resphylo   = matrix(0, Nsim, 2)
+
+# stocker la couverture
+cover_lm      = rep(0, 2)
+cover_phylo   = rep(0, 2)
+
+alpha = 0.05
+
+for(i in 1:Nsim){
+  x = rnorm(n)
+  X = cbind(1, x)
+  e = rnorm(n, 0, sqrt(sigma2))
+  y = X %*% B + e
+
+  # Fit LM
+  cfit = lm(y ~ x)
+  reslm[i, ] = coef(cfit)
+
+  # IC pour LM
+  se_lm = summary(cfit)$coefficients[,2]
+  lower_lm = coef(cfit) - qt(1-alpha/2, n-2) * se_lm
+  upper_lm = coef(cfit) + qt(1-alpha/2, n-2) * se_lm
+
+  cover_lm = cover_lm + (B >= lower_lm & B <= upper_lm)
+
+  # 2) Données phylogénétiques
+
+  tree = rphylo(n, 0.5, 0.5)
+
+  dat <- data.frame(y = y, x = x)
+  rownames(dat) <- tree$tip.label
+
+  phfit = phylolm(y ~ x, phy = tree, data = dat)
+  resphylo[i, ] = coef(phfit)
+
+  # IC phylolm
+  se_phy = summary(phfit)$coefficients[,2]
+  lower_phy = coef(phfit) - qt(1-alpha/2, n-2) * se_phy
+  upper_phy = coef(phfit) + qt(1-alpha/2, n-2) * se_phy
+
+  cover_phylo = cover_phylo + (B >= lower_phy & B <= upper_phy)
+}
+
+
+
+cat("Couverture des IC \n")
+cat("LM      : beta0 =", cover_lm[1]/Nsim, 
+    " beta1 =", cover_lm[2]/Nsim, "\n")
+cat("phylolm : beta0 =", cover_phylo[1]/Nsim, 
+    " beta1 =", cover_phylo[2]/Nsim, "\n")
+
+cat("\n RMSE\n")
+rmse_lm_beta0  = rmse(reslm[,1], B[1])
+rmse_lm_beta1  = rmse(reslm[,2], B[2])
+
+rmse_phy_beta0 = rmse(resphylo[,1], B[1])
+rmse_phy_beta1 = rmse(resphylo[,2], B[2])
+
+cat("RMSE LM beta0      :", rmse_lm_beta0, "\n")
+cat("RMSE LM beta1      :", rmse_lm_beta1, "\n")
+cat("RMSE phylolm beta0 :", rmse_phy_beta0, "\n")
+cat("RMSE phylolm beta1 :", rmse_phy_beta1, "\n")
+
+cat("\n Biais absolus \n")
+cat("LM beta1       :", abs(B[2] - mean(reslm[,2])), "\n")
+cat("phylolm beta1  :", abs(B[2] - mean(resphylo[,2])), "\n")
+
+
+```
+
+on a bien que le modele classique estime mieux que le modele phylogénétique - Aucune structure phylogénétique ==\> le modèle classique est meilleur
+
+```{r}
+set.seed(123)
+
+n = 50
+B = c(1, 5)             # beta0, beta1
+sigma2 = 2
+alpha = 0.05
+Nsim = 100
+
+# stockage des coefficients estimés
+reslm      <- matrix(0, Nsim, 2)   # beta0 , beta1
+resphylo   <- matrix(0, Nsim, 2)
+
+# couverture
+cover_lm      <- rep(0, 2)
+cover_phylo   <- rep(0, 2)
+
+# fonction RMSE
+rmse <- function(est, true) sqrt(mean((est - true)^2))
+
+for(i in 1:Nsim){
+  tree <- rphylo(n, birth = 0.5, death = 0)
+
+  x = rnorm(n, 0, 4)
+  names(x) <- tree$tip.label
+
+  eps = rTrait(
+    n = 1, phy = tree, model = "BM",
+    parameters = list(ancestral.state = 0, sigma2 = sigma2)
+  )
+
+
+  y = B[1] + B[2]*x + eps
+  names(y) <- tree$tip.label
+
+  fit_lm = lm(y ~ x)
+  coef_lm = coef(fit_lm)
+  reslm[i, ] = coef_lm
+
+  # IC LM
+  se_lm = summary(fit_lm)$coefficients[,2]
+  lower_lm = coef_lm - qt(1-alpha/2, df = n-2) * se_lm
+  upper_lm = coef_lm + qt(1-alpha/2, df = n-2) * se_lm
+
+  cover_lm = cover_lm + (B >= lower_lm & B <= upper_lm)
+
+  dat = data.frame(y = y, x = x)
+  rownames(dat) <- tree$tip.label
+
+  fit_phy = phylolm(y ~ x, phy = tree, data = dat)
+  coef_phy = coef(fit_phy)
+  resphylo[i, ] = coef_phy
+
+  # IC phylolm
+  se_phy = summary(fit_phy)$coefficients[,2]
+  lower_phy = coef_phy - qt(1-alpha/2, df = n-2) * se_phy
+  upper_phy = coef_phy + qt(1-alpha/2, df = n-2) * se_phy
+
+  cover_phylo = cover_phylo + (B >= lower_phy & B <= upper_phy)
+}
+
+
+
+cat("\n Couverture des IC \n")
+cat("LM      : beta0 =", cover_lm[1]/Nsim, " beta1 =", cover_lm[2]/Nsim, "\n")
+cat("phylolm : beta0 =", cover_phylo[1]/Nsim, " beta1 =", cover_phylo[2]/Nsim, "\n")
+
+cat("\n RMSE \n")
+cat("RMSE LM beta0      :", rmse(reslm[,1],      B[1]), "\n")
+cat("RMSE LM beta1      :", rmse(reslm[,2],      B[2]), "\n")
+cat("RMSE phylolm beta0 :", rmse(resphylo[,1],   B[1]), "\n")
+cat("RMSE phylolm beta1 :", rmse(resphylo[,2],   B[2]), "\n")
+
+cat("\n Biais absolu \n")
+cat("LM beta0       :", abs(B[1] - mean(reslm[,1])), "\n")
+cat("LM beta1       :", abs(B[2] - mean(reslm[,2])), "\n")
+cat("phylolm beta0  :", abs(B[1] - mean(resphylo[,1])), "\n")
+cat("phylolm beta1  :", abs(B[2] - mean(resphylo[,2])), "\n")
+
+
+```
+
+Quand les erreurs suivent un MB sur l'arbre (présence de structure phylogénétique) ==\> modèle phylolm qui est meilleur (correct).
