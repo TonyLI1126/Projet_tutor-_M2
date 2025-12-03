@@ -857,7 +857,29 @@ $$
 H_0 : \beta_2 = \cdots = \beta_K = 0.
 $$
 
-La statistique F phylogénétique est :
+SOMMES DES CARRÉS PHYLOGÉNÉTIQUES
+
+Somme des carrés expliquée (SSC) :
+
+$$
+\text{SSC}_{phylo}
+=
+(\hat y - \bar y)^\top C^{-1} (\hat y - \bar y)
+=
+\|\hat y - \bar y\|_{C^{-1}}^2.
+$$
+
+Somme des carrés résiduelle (SSR) :
+
+$$
+\text{SSR}_{phylo}
+=
+(y - \hat y)^\top C^{-1} (y - \hat y)
+=
+\|y - \hat y\|_{C^{-1}}^2.
+$$
+
+Donc la statistique de test est :
 
 $$
 F =
@@ -937,7 +959,7 @@ cat("ANOVA phylogénétique      :", rej_phylo/nsim*100, "%\n")
 ```
 
 \
-nous avons ici une erreur de premiere espece pour le modele classique a 18.2 % qui est bien supérieure a 0.05 et qui montre que ce modele n'est pas adapter pour les données de ce type alors que l'erreur de premiere espece de l'anova phylogénétique bien proche de 0.05 comme attendue
+nous avons ici une erreur de premiere espece pour le modele classique a 18.2 % qui est bien supérieure a 5% et qui montre que ce modele n'est pas adapter pour les données de ce type alors que l'erreur de premiere espece de l'anova phylogénétique bien proche de 5% comme attendue
 
 Puissance quand $H_1$ est vraie (effet de groupe non nul)
 
@@ -990,3 +1012,7 @@ cat("\n PUISSANCE (delta ≠ 0) \n")
 cat("ANOVA classique (lm)      :", rej_lm/nsim*100, "%\n")
 cat("ANOVA phylogénétique      :", rej_phylo/nsim*100, "%\n")
 ```
+
+Sous l'hypothèse que delta = 1, on a que la puissance de l'ANOVA classique est plus grande que l'ANOVA phylogénétique. Mais cette valeur est "fausse" car déjà sous H0 ce modèle avait un taux d'erreur de 18%. Le modèle était déjà mal calibré à la base, ce qui mène à une puissance faussée.
+
+La puissance pour l'ANOVA phylogénétique est plus juste et reflète vraiment la puissance.
