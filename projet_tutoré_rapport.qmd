@@ -942,3 +942,51 @@ nous avons ici une erreur de premiere espece pour le modele classique a 18.2 % q
 Puissance quand $H_1$ est vraie (effet de groupe non nul)
 
 On fixe maintenant un écart $\delta = 1$ entre les deux groupes pour mesurer la puissance des deux approches.
+
+```{r}
+set.seed(123)
+
+n = 8
+B0 = 2
+sigma2 = 1
+nsim = 500
+delta = 1     # différence entre les groupes -> H1 vraie
+
+rej_lm = 0
+rej_phylo = 0
+
+for(sim in 1:nsim){
+
+  # 1) Arbre
+  tree = rtree(n)
+
+  # 2) Bruit BM
+  eps = rTrait(
+    n = 1, phy = tree, model = "BM",
+    parameters = list(ancestral.state = 0, sigma2 = sigma2)
+  )
+
+  # 3) Deux groupes
+  group = factor(c(rep(1,4), rep(2,4)))
+  names(group) = tree$tip.label
+
+  # 4) Modèle H1 : moyennes différentes
+  y = B0 + delta*(group == 2) + eps
+  names(y) = tree$tip.label
+
+  # 5) ANOVA classique
+  fit_lm = lm(y ~ group)
+  p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
+  if(p_lm < 0.05) rej_lm <- rej_lm + 1
+
+  # 6) ANOVA phylogénétique
+  dat = data.frame(y = y, group = group)
+  fit_phylo = phylolm(y ~ group, phy = tree, data = dat)
+  p_phylo = summary(fit_phylo)$coefficients["group2","p.value"]
+  if(p_phylo < 0.05) rej_phylo <- rej_phylo + 1
+}
+
+cat("\n PUISSANCE (delta ≠ 0) \n")
+cat("ANOVA classique (lm)      :", rej_lm/nsim*100, "%\n")
+cat("ANOVA phylogénétique      :", rej_phylo/nsim*100, "%\n")
+```
