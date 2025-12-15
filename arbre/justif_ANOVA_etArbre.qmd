@@ -1,0 +1,424 @@
+## ANOVA classique et ANOVA phylogénétique
+
+On commence par rappeler l’ANOVA non phylogénétique, où les observations sont indépendantes.
+
+
+## ANOVA classique (erreurs indépendantes)
+
+Le modèle est :
+
+$$
+y = X\beta + \sigma \varepsilon,
+\qquad
+\varepsilon \sim \mathcal N(0, I).
+$$
+
+Dans ce cas, les sommes des carrés sont :
+
+-   Somme des carrés expliquée :
+
+$$
+SSC = \|\hat y - \bar y\|^2.
+$$
+
+-   Somme des carrés résiduels :
+
+$$
+SSR = \|y - \hat y\|^2.
+$$
+
+La statistique F classique est :
+
+$$
+F =
+\frac{SSC/(K-1)}{SSR/(n-K)},
+\qquad
+F \sim F_{K-1,\,n-K}
+\quad \text{sous } H_0.
+$$
+
+
+# ANOVA phylogénétique
+
+On part maintenant du modèle phylogénétique :
+
+$$
+y = X\beta + \sigma E,
+\qquad
+E \sim \mathcal N(0, C),
+$$
+
+où (C) est la matrice de covariance issue de l’arbre (exemple : Brownian Motion).
+
+
+## 1. Objectif
+
+Revenir à un modèle avec erreurs indépendantes pour utiliser la même statistique F que dans l’ANOVA classique
+
+
+## 2. Décomposition de Cholesky
+
+Comme (C) est symétrique définie positive :
+
+$$
+C = LL^\top,
+$$
+
+où $L$ est triangulaire inférieure et inversible.
+
+
+
+## 3. Transformation
+On transforme les données :
+
+$$
+y^* = L^{-1}y, \qquad X^* = L^{-1}X,
+$$
+
+et les erreurs :
+
+$$
+E^* = L^{-1}E.
+$$
+
+Comme
+
+$$
+E \sim \mathcal N(0, C = LL^\top),
+$$
+
+on obtient :
+
+$$
+E^\* = L^{-1}E \sim \mathcal N(0, I).
+$$
+
+
+## 4. Modèle transformé
+
+On obtient exactement un modèle classique :
+
+$$
+y^* = X^*\beta + \sigma E^*,
+\qquad
+E^* \sim \mathcal N(0, I),
+$$
+
+donc les outils de l’ANOVA standard s’appliquent directement.
+
+## 5. Sommes des carrés dans l’espace transformé
+
+Somme des carrés résiduels :
+
+$$
+SSR^* = \|y^* - \hat y^*\|^2.
+$$
+
+Somme des carrés expliqués :
+
+$$
+SSC^* = \|\hat y^* - \bar y^*\|^2.
+$$
+
+Statistique F classique :
+
+$$
+F^* =
+\frac{SSC^*/(K-1)}{SSR^*/(n-K)}.
+$$
+
+
+## 6. Revenir aux données originales : norme pondérée (C\^{-1})
+
+Comme
+
+$$
+y^* = L^{-1}y,
+$$
+
+alors :
+
+$$
+\|y^* - \hat y^*\|^2
+= (y - \hat y)^\top (L^{-1})^\top L^{-1}(y - \hat y)
+= (y - \hat y)^\top C^{-1}(y - \hat y).
+$$
+
+D’où la somme des carrés résiduelle phylogénétique :
+
+$$
+SSR_{\text{phylo}}
+= (y - \hat y)^\top C^{-1}(y - \hat y).
+$$
+
+Et :
+
+$$
+SSC_{\text{phylo}}
+= (\hat y - \bar y)^\top C^{-1}(\hat y - \bar y).
+$$
+
+## 7. Statistique F phylogénétique
+
+Elle est donc :
+
+$$
+F =
+\frac{SSC_{\text{phylo}}/(K-1)}
+     {SSR_{\text{phylo}}/(n-K)}.
+$$
+
+Sous l’hypothèse nulle :
+
+$$
+F \sim F_{K-1,\,n-K}.
+$$
+
+La transformation n’ayant changé ni les degrés de liberté ni la forme du test, la loi F est identique à celle de l’ANOVA classique.
+
+
+
+
+Maintenant on va essayer de comparer l'anova classique et l'anova phylogénétique sur des données phylogénétique  
+
+```{r}
+library(ape)
+library(phylolm)
+library(here)
+```
+
+
+
+```{r}
+here::here()
+```
+
+```{r}
+
+```
+
+
+```{r}
+  tree_emp = read.nexus(here("arbre", "ajb20244-sup-0001.txt"))
+```
+
+```{r}
+class(tree_emp)
+```
+
+
+
+```{r}
+
+set.seed(888)
+
+sigma2 = 1        # variance du BM
+nsim = 500        # nombre de simulations
+B0 = 2            # moyenne sous H0
+tree_emp$root.edge = NULL
+
+n = length(tree_emp$tip.label) 
+
+
+calc_type1 = function(group){
+
+  rej_lm = 0
+  rej_phylo = 0
+
+  for(sim in 1:nsim){
+
+    # 1) Simuler bruit BM sur l'arbre fixé
+    eps = rTrait(
+      n = 1, phy = tree_emp, model = "BM",
+      parameters = list(ancestral.state = 0, sigma2 = sigma2)
+    )
+
+    eps = eps[tree_emp$tip.label]
+
+    # 2) modèle sous H0
+    y = B0 + eps
+    names(y) = tree_emp$tip.label
+
+    # 3) ANOVA classique
+    fit_lm = lm(y ~ group)
+    p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
+    if(p_lm < 0.05) rej_lm = rej_lm + 1
+
+    # 4) ANOVA phylogénétique
+    dat = data.frame(y = y, group = group)
+    fit_phylo = phylolm(y ~ group, phy = tree_emp, data = dat)
+    p_phylo = summary(fit_phylo)$coefficients["group2", "p.value"]
+    if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
+  }
+
+  return(c(
+    lm = rej_lm/nsim * 100,
+    phylo = rej_phylo/nsim * 100
+  ))
+}
+
+
+#groupe cladé
+
+group_clade = factor(c(rep(1, n/2), rep(2, n/2)))
+names(group_clade) = tree_emp$tip.label
+
+
+# groupe alterné
+
+group_alt = factor(rep(c(1,2), length.out = n))
+names(group_alt) = tree_emp$tip.label
+
+#groupe aléatoire
+set.seed(888)
+group_rand = factor(sample(c(1,2), n, replace = TRUE))
+names(group_rand) = tree_emp$tip.label
+
+
+#calcul erreur de type I
+
+res_clade = calc_type1(group_clade)
+res_alt   = calc_type1(group_alt)
+res_rand  = calc_type1(group_rand)
+
+#tableau final
+results = rbind(
+  Clade     = res_clade,
+  Alterné   = res_alt,
+  Aléatoire = res_rand
+)
+
+print("ERREUR DE TYPE I (%)")
+print(round(results, 2))
+
+
+```
+Cas Clades
+lorsque qu'on répartie les groupes en clades chaque groupe a des valeurs corréllé entre elles mais entre groupe les moyennes sont différentes c'est pour cela que l'anova classique qui ne tient pas comptent des corrélations se trompent beaucoup plus que le modele phylogénétique qui est proche de 5 %
+
+Cas alterné 
+avec la répartitions alterné chaque voisin on des groupes différents et comme l'anova classique ne dectecte pas les correlation entre groupe elle ne detecte aucune différence et donc son erreur est égale a 0 contrairement au donné phylogénétique  qui a une erreur proche de 5¨%
+
+Cas random:
+du fait de la randomisation on peut considérer comme un mélange des deux cas précédent ce qui fait que l'anova classique a toujours une erreur un peu plus haute que prévu car ce n'est pas le modele adéquate alors que le modele phylogénétique a une erreur proche de 5 %
+
+```{r}
+cols = c("red", "blue")[group_clade]
+plot(ladderize(tree_emp), tip.color = cols, cex = 0.4)
+```
+
+
+
+```{r}
+cols_alt = c("red", "blue")[group_alt]
+plot(ladderize(tree_emp), tip.color = cols_alt, cex = 0.4)
+```
+
+```{r}
+cols_rand = c("red", "blue")[group_rand]
+plot(ladderize(tree_emp), tip.color = cols_rand, cex = 0.4)
+```
+
+
+
+
+
+```{r}
+sigma2 = 1        # variance du BM
+nsim = 500        # nombre de simulations
+B0 = 2            # baseline
+delta = 1         # effet du groupe 2 
+tree_emp$root.edge = NULL
+
+n = length(tree_emp$tip.label) 
+
+
+
+# Fonction PUISSANCE
+
+
+calc_puissance = function(group){
+
+  rej_lm = 0
+  rej_phylo = 0
+
+  for(sim in 1:nsim){
+
+    # 1) Bruit BM sur arbre fixe
+    eps = rTrait(
+      n = 1, phy = tree_emp, model = "BM",
+      parameters = list(ancestral.state = 0, sigma2 = sigma2)
+    )
+
+    eps = eps[tree_emp$tip.label]
+
+    # 2) Modèle sous H1 : groupe 2 a un effet delta
+    y = B0 + delta*(group == 2) + eps
+    names(y) = tree_emp$tip.label
+
+    # 3) ANOVA classique
+    fit_lm = lm(y ~ group)
+    p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
+    if(p_lm < 0.05) rej_lm = rej_lm + 1
+
+    # 4) ANOVA phylogénétique
+    dat = data.frame(y = y, group = group)
+    fit_phylo = phylolm(y ~ group, phy = tree_emp, data = dat)
+    p_phylo = summary(fit_phylo)$coefficients["group2", "p.value"]
+    if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
+  }
+
+  return(c(
+    lm = rej_lm/nsim * 100,
+    phylo = rej_phylo/nsim * 100
+  ))
+}
+
+
+
+# 
+
+
+# Groupe clade 
+group_clade = factor(c(rep(1, n/2), rep(2, n/2)))
+names(group_clade) = tree_emp$tip.label
+
+# Groupe alterné 
+group_alt = factor(rep(c(1,2), length.out = n))
+names(group_alt) = tree_emp$tip.label
+
+# Groupe aléatoire
+set.seed(888)
+group_rand = factor(sample(c(1,2), n, replace = TRUE))
+names(group_rand) = tree_emp$tip.label
+
+
+
+# Calcul de la PUISSANCE
+
+
+res_clade = calc_puissance(group_clade)
+res_alt   = calc_puissance(group_alt)
+res_rand  = calc_puissance(group_rand)
+
+# Tableau final
+results = rbind(
+  Clade     = res_clade,
+  Alterné   = res_alt,
+  Aléatoire = res_rand
+)
+
+print("PUISSANCE (%)")
+print(round(results, 2))
+```
+
+delta = 1 
+cas clade :
+lm détecte a une grosse puissance car comme c'est le mauvaus modele elle detecte toujours une différence car elle ignore la corrélation
+pour phylom du a la variance tres grande entre les clades . il ne détecte pas bien  l'effet du groupe 2  . 
+
+cas alterné :
+le modele classique ne détecte presque pas l'effet du groupe 2 contrairement au modele phylogénétique avec une puissance de 86%
+
+cas: aleatoire :
+du fait de l'aléatoire on a que le modele phylogénétique est un peu moins puissant que lorsque que lors du cas alterné mais garde quand meme une bonne puissance

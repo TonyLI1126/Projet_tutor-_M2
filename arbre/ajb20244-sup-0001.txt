@@ -1,0 +1,1242 @@
+#NEXUS
+[written Mon Sep 06 16:04:23 CEST 2010 by Mesquite  version 2.73 (build 544) at ramona-wallss-macbook.local/127.0.0.1]
+
+[American Journal of Botany 98(2): 244-253. 2011 - Appendix S1]
+
+
+BEGIN TAXA;
+	TITLE Phylocom_Phylogeny_Taxa;
+	DIMENSIONS NTAX=468;
+	TAXLABELS
+		Aextoxicon_punctatum Amaranthus_blitoides Amaranthus_retroflexus Atriplex_canescens Atriplex_halimus Atriplex_stipitata Beta_vulgaris Chenopodium_album Chenopodium_oahuense Neea_obovata Oxyria_digyna Polygonum_bistorta Polygonum_pensylvanicum Polygonum_viviparum Rheum_acuminatum Rheum_nobile Dillenia_suffruticosa Hibbertia_bracteata Hibbertia_huegelii Hibbertia_subvaginata Anacardium_excelsum Buchanania_obovata Pistacia_lentiscus Pistacia_terebinthus Rhus_sandwicensis Rhus_tomentosa Toxicodendron_diversiloba Synoum_glandulosum Cneorum_tricoccon Correa_reflexa Philotheca_difformis Acer_campestre Acer_mono Acer_monspessulanum Acer_palmatum Acer_pensylvanicum Acer_platanoides Acer_pseudoplatanus Acer_rubrum Acer_saccharum Dodonaea_viscosa Capparis_spinosa Capparis_verrucosa Dentaria_laciniata Morisonia_americana Cistus_albidus Cistus_monspeliensis Cistus_salvifolius Abutilon_theophrasti Brachychiton_populneus Lasiopetalum_ferrugineum Lavatera_cretica Luehea_seemannii Malvastrum_rotundifolium Pseudobombax_septenatum Tilia_cordata Tilia_japonica Dirca_occidentalis Pimelea_linifolia Pimelea_microcephala Alnus_hirsuta Alnus_incana Alnus_japonica Betula_davurica Betula_ermanii Betula_glandulosa Betula_maximowicziana Betula_nana Betula_nigra Betula_papyrifera Betula_pendula Betula_platyphylla Betula_populifolia Betula_pubescens Betula_pumila Carpinus_betulus Carpinus_cordata Corylus_americana Ostrya_japonica Carya_ovata Juglans_nigra Comptonia_peregrina Castanea_dentata Castanopsis_sieboldii Quercus_acuta Quercus_alba Quercus_austrina Quercus_chapmanii Quercus_coccifera Quercus_coccinea Quercus_ellipsoidalis Quercus_faginea Quercus_falcata Quercus_geminata Quercus_hemisphaerica Quercus_humilis Quercus_ilex Quercus_incana Quercus_laevis Quercus_laurifolia Quercus_macrocarpa Quercus_margaretta Quercus_michauxii Quercus_minima Quercus_mongolica Quercus_myrsinaefolia Quercus_myrtifolia Quercus_nigra Quercus_pubescens Quercus_pumila Quercus_pyrenaica Quercus_robur Quercus_rotundifolia Quercus_rubra Quercus_shumardii Quercus_stellata Quercus_suber Quercus_virginiana Fagus_grandifolia Fagus_sylvatica Nothofagus_betuloides Nothofagus_dombeyi Eleagnus_angustifolia Castilla_elastica Ficus_obtusifolia Ficus_racemosa Ficus_scobina Cecropia_ficifolia Cecropia_longipes Urera_caracasana Urtica_atrovirens Celtis_occidentalis Trema_tomentosa Ulmus_americana Ulmus_davidiana Ulmus_laciniata Ceanothus_cuneatus Ceanothus_oliganthus Pomaderris_ferruginea Rhamnus_alaternus Rhamnus_californica Rhamnus_cathartica Rhamnus_crocea Rhamnus_ludovicisalvatoris Amelanchier_alnifolia Aronia_melanocarpa Cercocarpus_betuloides Crataegus_monogyna Dryas_integrifolia Geum_montanum Geum_reptans Geum_rivale Heteromeles_arbutifolia Holodiscus_discolor Photinia_davidiana Potentilla_anserina Potentilla_arguta Potentilla_crantzii Potentilla_peduncularis Prunus_ilicifolia Prunus_mahaleb Prunus_sargentii Prunus_serotina Prunus_spinosa Prunus_ssiori Pyrus_bourgaeana Rosa_micrantha Rubus_chamaemorus Rubus_corylifolius Rubus_hispidus Sanguisorba_minor Sorbus_alnifolia Sorbus_commixta Spiraea_alba Spiraea_tomentosa Acacia_auriculiformis Acacia_doratoxylon Acacia_floribunda Acacia_oswaldii Acacia_suaveolens Senna_artemisioides Desmodium_canadense Lonchocarpus_dipteroneurus Lotus_scoparius Robinia_pseudoacacia Lupinus_perennis Sophora_chrysophylla Amorpha_canescens Anagyris_foetida Astragalus_candensis Baptisia_leucophaea Bowdichia_virgilioides Ceratonia_siliqua Chamaedaphne_calyculata Eperua_purpurea Gompholobium_grandiflorum Lespedeza_capitata Maackia_amurensis Medicago_minima Petalostemum_purpureum Petalostemum_villosum Phyllota_phylicoides Pithecellobium_dulce Pultenaea_daphnoides Pultenaea_flexilis Trifolium_repens Caryocar_brasiliense Licania_heteromorpha Caraipa_heterocarpa Hypericum_balearicum Kielmeyera_coriacea Vismia_japurensis Vismia_lauriformis Aporosa_bracteosa Aporosa_lunata Aporosa_microstachya Euphorbia_margalidiana Macaranga_heynei Macaranga_triloba Mallotus_paniculatus Manihot_esculenta Micrandra_sprucei Goupia_glabra Populus_deltoides Populus_fremontii Populus_grandidentata Populus_maximowiczii Populus_sieboldii Populus_tremuloides Salix_fragilis Salix_glauca Salix_hultenii Salix_planifolia Salix_pulchra Salix_reticulata Viola_jaubertiana Maytenus_oleoides Connarus_suberosus Eucryphia_cordifolia Terminalia_ferdinandiana Clidemia_sericea Melastoma_malabathricum Miconia_albicans Miconia_dispar Miconia_ligustroides Calytrix_flavescens Campomanesia_aromatica Corymbia_gummifera Eucalyptus_haemostoma Melaleuca_leucadendra Melaleuca_viridiflora Metrosideros_polymorpha Syncarpia_glomulifera Syzygium_houttuynii Syzygium_suborbiculare Leptospermum_polygalifolium Leptospermum_trinervium Myrceugenia_planipes Regelia_ciliata Scholtzia_involucrata Verticordia_nitens Xanthostemon_paradoxus Camissonia_brevipes Camissonia_claviformis Cercidiphyllum_japonicum Ribes_californicum Ribes_uvacrispa Itea_virginica Bupleurum_rigidum Carum_carvi Daucus_carota Eryngium_campestre Ligusticum_mutellina Astrotricha_floccosa Cheirodendron_trigynum Didymopanax_morototoni Didymopanax_vinosum Achillea_erba Achillea_millefolium Ambrosia_artemisiifolia Ambrosia_trifida Artemisia_tridentata Aster_azureus Aster_ericoides Aster_novaeangliae Baccharis_pilularis Chrysanthemum_leucanthemum Cichorium_intybus Crepis_triasii Dittrichia_viscosa Echinacea_purpurea Echinops_ritro Erigeron_uniflorus Eupatorium_rugosum Gutierrezia_sarothrae Helianthus_microcephalus Helichrysum_apiculatum Liatris_aspera Petasites_frigidus Piptocarpha_rotundifolia Pterocaulon_pycnostachyum Silphium_integrifolium Silphium_terebinthinaceum Solidago_nemoralis Solidago_rigida Taraxacum_alpinum Taraxacum_officinale Lonicera_bella Sambucus_mexicana Viburnum_cassinoides Viburnum_tinus Cephalaria_squamiflora Ilex_verticillata Aspidosperma_album Aspidosperma_tomentosum Wrightia_pubescens Asclepias_syriaca Asclepias_tuberosa Pittoniotis_trichantha Coprosma_ochracea Psychotria_limonensis Psychotria_marginata Retiniphyllum_truncatum Rubia_peregrina Mansoa_verrucifera Agastache_foeniculum Calamintha_nepeta Lavandula_dentata Lavandula_latifolia Lepechinia_calycina Phlomis_italica Teucrium_chamaedrys Pinguicula_vulgaris Myoporum_sandwicense Fraxinus_americana Fraxinus_angustifolia Fraxinus_mandshurica Phillyrea_latifolia Plantago_lanceolata Mimulus_aurantiacus Penstemon_grandiflorus Picrorhiza_scrophulariiflora Verbascum_sinuatum Vitex_agnuscastus Convolvulus_arvensis Datura_stramonium Solanum_ferocissimum Eriodictyon_californicum Clethra_alnifolia Cyrilla_racemiflora Andromeda_glaucophylla Arbutus_menziesii Arbutus_unedo Arctostaphylos_tomentosa Arctostaphylos_uvaursi Arctous_alpina Astroloma_xerophyllum Conostephium_pendulum Gaylussacia_baccata Kalmia_angustifolia Kalmia_latifolia Kalmia_polifolia Ledum_groenlandicum Ledum_palustre Leucothoe_racemosa Lyonia_lucida Rhododendron_anthopogon Rhododendron_maximum Vaccinium_arboreum Vaccinium_corymbosum Vaccinium_myrtilloides Vaccinium_myrtillus Vaccinium_uliginosum Vaccinium_vitisidaea Galax_aphylla Styrax_camporum Diospyros_cauliflora Planchonia_careya Maesa_japonica Myrsine_lessertiana Primula_elatior Camellia_japonica Cleyera_japonica Cornus_contraversa Cornus_florida Cornus_racemosa Broussaisia_arguta Santalum_acuminatum Buxus_sempervirens Banksia_attenuata Banksia_menziesii Embothrium_coccineum Gevuina_avellana Grevillea_buxifolia Grevillea_speciosa Lambertia_formosa Xylomelum_pyriforme Lomatia_hirsuta Lomatia_silaifolia Protea_acaulos Protea_neriifolia Protea_nitida Protea_repens Stirlingia_latifolia Hakea_dactyloides Hakea_tephrosperma Hakea_teretifolia Caulophyllum_thalictroides Podophyllum_peltatum Anemone_cylindrica Helleborus_foetidus Helleborus_lividus Paeonia_cambessedesii Sanguinaria_canadensis Annona_coriacea Duguetia_furfuracea Liriodendron_tulipifera Magnolia_obovata Cinnamomum_japonicum Cryptocarya_alba Machilus_thunbergii Neolitsea_sericea Ocotea_costulata Persea_borbonia Persea_lingue Umbellularia_californica Laurelia_philippiana Piper_aequale Piper_amalago Piper_auritum Piper_hispidum Piper_umbellatum Drimys_piperita Drimys_winter Anigozanthos_humilis Calathea_inocephala Pleiostachya_pruinosa Aegilops_geniculata Agropyron_repens Agrostis_scabra Andropogon_gerardi Avenula_bromoides Avenula_crassifolia Bouteloua_curtipendula Brachypodium_distachyon Brachypodium_phoenicoides Bromus_erectus Bromus_inermis Bromus_lanceolatus Stipa_spartea Panicum_capillare Panicum_virgatum Calamagrostis_canadensis Calamovilfa_longifolia Dactylis_glomerata Hierochloe_alpina Koeleria_cristata Phleum_pratense Poa_pratensis Sorghastrum_nutans Gladiolus_caryophyllaceus Patersonia_occidentalis Erythronium_americanum Urginea_maritima Veratrum_parviflorum Trillium_grandiflora Freycinetia_arborea Illicium_anisatum 
+	;
+
+END;
+
+
+BEGIN CHARACTERS;
+	TITLE  Primary_Vein_Type;
+	DIMENSIONS  NCHAR=1;
+	FORMAT DATATYPE = STANDARD GAP = - MISSING = ? SYMBOLS = "  0 1 2 3";
+	CHARSTATELABELS 
+		1 PriVein ; 
+	MATRIX
+	Aextoxicon_punctatum          1
+	Amaranthus_blitoides          1
+	Amaranthus_retroflexus        1
+	Atriplex_canescens            1
+	Atriplex_halimus              1
+	Atriplex_stipitata            2
+	Beta_vulgaris                 1
+	Chenopodium_album             1
+	Chenopodium_oahuense          1
+	Neea_obovata                  1
+	Oxyria_digyna                 2
+	Polygonum_bistorta            1
+	Polygonum_pensylvanicum       1
+	Polygonum_viviparum           1
+	Rheum_acuminatum              2
+	Rheum_nobile                  2
+	Dillenia_suffruticosa         1
+	Hibbertia_bracteata           1
+	Hibbertia_huegelii            1
+	Hibbertia_subvaginata         1
+	Anacardium_excelsum           1
+	Buchanania_obovata            1
+	Pistacia_lentiscus            1
+	Pistacia_terebinthus          1
+	Rhus_sandwicensis             1
+	Rhus_tomentosa                1
+	Toxicodendron_diversiloba     1
+	Synoum_glandulosum            1
+	Cneorum_tricoccon             1
+	Correa_reflexa                1
+	Philotheca_difformis          1
+	Acer_campestre                2
+	Acer_mono                     2
+	Acer_monspessulanum           2
+	Acer_palmatum                 2
+	Acer_pensylvanicum            2
+	Acer_platanoides              2
+	Acer_pseudoplatanus           2
+	Acer_rubrum                   2
+	Acer_saccharum                2
+	Dodonaea_viscosa              1
+	Capparis_spinosa              1
+	Capparis_verrucosa            1
+	Dentaria_laciniata            2
+	Morisonia_americana           1
+	Cistus_albidus                1
+	Cistus_monspeliensis          1
+	Cistus_salvifolius            1
+	Abutilon_theophrasti          2
+	Brachychiton_populneus        1
+	Lasiopetalum_ferrugineum      1
+	Lavatera_cretica              2
+	Luehea_seemannii              1
+	Malvastrum_rotundifolium      2
+	Pseudobombax_septenatum       1
+	Tilia_cordata                 1
+	Tilia_japonica                1
+	Dirca_occidentalis            1
+	Pimelea_linifolia             1
+	Pimelea_microcephala          1
+	Alnus_hirsuta                 1
+	Alnus_incana                  1
+	Alnus_japonica                1
+	Betula_davurica               1
+	Betula_ermanii                1
+	Betula_glandulosa             1
+	Betula_maximowicziana         1
+	Betula_nana                   1
+	Betula_nigra                  1
+	Betula_papyrifera             1
+	Betula_pendula                1
+	Betula_platyphylla            1
+	Betula_populifolia            1
+	Betula_pubescens              1
+	Betula_pumila                 1
+	Carpinus_betulus              1
+	Carpinus_cordata              1
+	Corylus_americana             1
+	Ostrya_japonica               1
+	Carya_ovata                   1
+	Juglans_nigra                 1
+	Comptonia_peregrina           1
+	Castanea_dentata              1
+	Castanopsis_sieboldii         1
+	Quercus_acuta                 1
+	Quercus_alba                  1
+	Quercus_austrina              1
+	Quercus_chapmanii             1
+	Quercus_coccifera             1
+	Quercus_coccinea              1
+	Quercus_ellipsoidalis         1
+	Quercus_faginea               1
+	Quercus_falcata               1
+	Quercus_geminata              1
+	Quercus_hemisphaerica         1
+	Quercus_humilis               1
+	Quercus_ilex                  1
+	Quercus_incana                1
+	Quercus_laevis                1
+	Quercus_laurifolia            1
+	Quercus_macrocarpa            1
+	Quercus_margaretta            1
+	Quercus_michauxii             1
+	Quercus_minima                1
+	Quercus_mongolica             1
+	Quercus_myrsinaefolia         1
+	Quercus_myrtifolia            1
+	Quercus_nigra                 1
+	Quercus_pubescens             1
+	Quercus_pumila                1
+	Quercus_pyrenaica             1
+	Quercus_robur                 1
+	Quercus_rotundifolia          1
+	Quercus_rubra                 1
+	Quercus_shumardii             1
+	Quercus_stellata              1
+	Quercus_suber                 1
+	Quercus_virginiana            1
+	Fagus_grandifolia             1
+	Fagus_sylvatica               1
+	Nothofagus_betuloides         1
+	Nothofagus_dombeyi            1
+	Eleagnus_angustifolia         1
+	Castilla_elastica             1
+	Ficus_obtusifolia             1
+	Ficus_racemosa                1
+	Ficus_scobina                 1
+	Cecropia_ficifolia            2
+	Cecropia_longipes             2
+	Urera_caracasana              1
+	Urtica_atrovirens             2
+	Celtis_occidentalis           1
+	Trema_tomentosa               1
+	Ulmus_americana               1
+	Ulmus_davidiana               1
+	Ulmus_laciniata               1
+	Ceanothus_cuneatus            1
+	Ceanothus_oliganthus          1
+	Pomaderris_ferruginea         1
+	Rhamnus_alaternus             1
+	Rhamnus_californica           1
+	Rhamnus_cathartica            1
+	Rhamnus_crocea                1
+	Rhamnus_ludovicisalvatoris    1
+	Amelanchier_alnifolia         1
+	Aronia_melanocarpa            1
+	Cercocarpus_betuloides        1
+	Crataegus_monogyna            1
+	Dryas_integrifolia            1
+	Geum_montanum                 2
+	Geum_reptans                  2
+	Geum_rivale                   2
+	Heteromeles_arbutifolia       1
+	Holodiscus_discolor           1
+	Photinia_davidiana            1
+	Potentilla_anserina           1
+	Potentilla_arguta             1
+	Potentilla_crantzii           2
+	Potentilla_peduncularis       1
+	Prunus_ilicifolia             1
+	Prunus_mahaleb                1
+	Prunus_sargentii              1
+	Prunus_serotina               1
+	Prunus_spinosa                1
+	Prunus_ssiori                 1
+	Pyrus_bourgaeana              1
+	Rosa_micrantha                1
+	Rubus_chamaemorus             2
+	Rubus_corylifolius            1
+	Rubus_hispidus                1
+	Sanguisorba_minor             1
+	Sorbus_alnifolia              1
+	Sorbus_commixta               1
+	Spiraea_alba                  1
+	Spiraea_tomentosa             1
+	Acacia_auriculiformis         3
+	Acacia_doratoxylon            3
+	Acacia_floribunda             3
+	Acacia_oswaldii               3
+	Acacia_suaveolens             1
+	Senna_artemisioides           1
+	Desmodium_canadense           1
+	Lonchocarpus_dipteroneurus    1
+	Lotus_scoparius               1
+	Robinia_pseudoacacia          1
+	Lupinus_perennis              1
+	Sophora_chrysophylla          1
+	Amorpha_canescens             1
+	Anagyris_foetida              1
+	Astragalus_candensis          1
+	Baptisia_leucophaea           1
+	Bowdichia_virgilioides        1
+	Ceratonia_siliqua             1
+	Chamaedaphne_calyculata       1
+	Eperua_purpurea               1
+	Gompholobium_grandiflorum     1
+	Lespedeza_capitata            1
+	Maackia_amurensis             1
+	Medicago_minima               1
+	Petalostemum_purpureum        1
+	Petalostemum_villosum         1
+	Phyllota_phylicoides          1
+	Pithecellobium_dulce          1
+	Pultenaea_daphnoides          1
+	Pultenaea_flexilis            1
+	Trifolium_repens              1
+	Caryocar_brasiliense          1
+	Licania_heteromorpha          1
+	Caraipa_heterocarpa           1
+	Hypericum_balearicum          1
+	Kielmeyera_coriacea           1
+	Vismia_japurensis             1
+	Vismia_lauriformis            1
+	Aporosa_bracteosa             1
+	Aporosa_lunata                1
+	Aporosa_microstachya          1
+	Euphorbia_margalidiana        1
+	Macaranga_heynei              1
+	Macaranga_triloba             1
+	Mallotus_paniculatus          2
+	Manihot_esculenta             2
+	Micrandra_sprucei             1
+	Goupia_glabra                 1
+	Populus_deltoides             1
+	Populus_fremontii             1
+	Populus_grandidentata         1
+	Populus_maximowiczii          1
+	Populus_sieboldii             1
+	Populus_tremuloides           1
+	Salix_fragilis                1
+	Salix_glauca                  1
+	Salix_hultenii                1
+	Salix_planifolia              1
+	Salix_pulchra                 1
+	Salix_reticulata              1
+	Viola_jaubertiana             2
+	Maytenus_oleoides             1
+	Connarus_suberosus            1
+	Eucryphia_cordifolia          1
+	Terminalia_ferdinandiana      1
+	Clidemia_sericea              3
+	Melastoma_malabathricum       3
+	Miconia_albicans              3
+	Miconia_dispar                3
+	Miconia_ligustroides          3
+	Calytrix_flavescens           1
+	Campomanesia_aromatica        1
+	Corymbia_gummifera            1
+	Eucalyptus_haemostoma         1
+	Melaleuca_leucadendra         3
+	Melaleuca_viridiflora         3
+	Metrosideros_polymorpha       1
+	Syncarpia_glomulifera         1
+	Syzygium_houttuynii           1
+	Syzygium_suborbiculare        1
+	Leptospermum_polygalifolium   1
+	Leptospermum_trinervium       1
+	Myrceugenia_planipes          1
+	Regelia_ciliata               1
+	Scholtzia_involucrata         1
+	Verticordia_nitens            1
+	Xanthostemon_paradoxus        1
+	Camissonia_brevipes           1
+	Camissonia_claviformis        1
+	Cercidiphyllum_japonicum      2
+	Ribes_californicum            2
+	Ribes_uvacrispa               2
+	Itea_virginica                1
+	Bupleurum_rigidum             3
+	Carum_carvi                   1
+	Daucus_carota                 1
+	Eryngium_campestre            1
+	Ligusticum_mutellina          1
+	Astrotricha_floccosa          1
+	Cheirodendron_trigynum        1
+	Didymopanax_morototoni        1
+	Didymopanax_vinosum           1
+	Achillea_erba                 1
+	Achillea_millefolium          1
+	Ambrosia_artemisiifolia       1
+	Ambrosia_trifida              2
+	Artemisia_tridentata          2
+	Aster_azureus                 1
+	Aster_ericoides               1
+	Aster_novaeangliae            1
+	Baccharis_pilularis           3
+	Chrysanthemum_leucanthemum    1
+	Cichorium_intybus             1
+	Crepis_triasii                1
+	Dittrichia_viscosa            1
+	Echinacea_purpurea            3
+	Echinops_ritro                1
+	Erigeron_uniflorus            1
+	Eupatorium_rugosum            2
+	Gutierrezia_sarothrae         1
+	Helianthus_microcephalus      1
+	Helichrysum_apiculatum        1
+	Liatris_aspera                1
+	Petasites_frigidus            2
+	Piptocarpha_rotundifolia      1
+	Pterocaulon_pycnostachyum     1
+	Silphium_integrifolium        1
+	Silphium_terebinthinaceum     1
+	Solidago_nemoralis            1
+	Solidago_rigida               1
+	Taraxacum_alpinum             1
+	Taraxacum_officinale          1
+	Lonicera_bella                1
+	Sambucus_mexicana             1
+	Viburnum_cassinoides          1
+	Viburnum_tinus                1
+	Cephalaria_squamiflora        1
+	Ilex_verticillata             1
+	Aspidosperma_album            1
+	Aspidosperma_tomentosum       1
+	Wrightia_pubescens            1
+	Asclepias_syriaca             1
+	Asclepias_tuberosa            1
+	Pittoniotis_trichantha        1
+	Coprosma_ochracea             1
+	Psychotria_limonensis         1
+	Psychotria_marginata          1
+	Retiniphyllum_truncatum       1
+	Rubia_peregrina               1
+	Mansoa_verrucifera            1
+	Agastache_foeniculum          1
+	Calamintha_nepeta             1
+	Lavandula_dentata             1
+	Lavandula_latifolia           1
+	Lepechinia_calycina           1
+	Phlomis_italica               1
+	Teucrium_chamaedrys           3
+	Pinguicula_vulgaris           1
+	Myoporum_sandwicense          1
+	Fraxinus_americana            1
+	Fraxinus_angustifolia         1
+	Fraxinus_mandshurica          1
+	Phillyrea_latifolia           1
+	Plantago_lanceolata           3
+	Mimulus_aurantiacus           1
+	Penstemon_grandiflorus        1
+	Picrorhiza_scrophulariiflora  1
+	Verbascum_sinuatum            1
+	Vitex_agnuscastus             1
+	Convolvulus_arvensis          1
+	Datura_stramonium             1
+	Solanum_ferocissimum          1
+	Eriodictyon_californicum      1
+	Clethra_alnifolia             1
+	Cyrilla_racemiflora           1
+	Andromeda_glaucophylla        1
+	Arbutus_menziesii             1
+	Arbutus_unedo                 1
+	Arctostaphylos_tomentosa      1
+	Arctostaphylos_uvaursi        1
+	Arctous_alpina                1
+	Astroloma_xerophyllum         1
+	Conostephium_pendulum         1
+	Gaylussacia_baccata           1
+	Kalmia_angustifolia           1
+	Kalmia_latifolia              1
+	Kalmia_polifolia              1
+	Ledum_groenlandicum           1
+	Ledum_palustre                1
+	Leucothoe_racemosa            1
+	Lyonia_lucida                 1
+	Rhododendron_anthopogon       1
+	Rhododendron_maximum          1
+	Vaccinium_arboreum            1
+	Vaccinium_corymbosum          1
+	Vaccinium_myrtilloides        1
+	Vaccinium_myrtillus           1
+	Vaccinium_uliginosum          1
+	Vaccinium_vitisidaea          1
+	Galax_aphylla                 2
+	Styrax_camporum               1
+	Diospyros_cauliflora          1
+	Planchonia_careya             1
+	Maesa_japonica                1
+	Myrsine_lessertiana           1
+	Primula_elatior               1
+	Camellia_japonica             1
+	Cleyera_japonica              1
+	Cornus_contraversa            1
+	Cornus_florida                1
+	Cornus_racemosa               1
+	Broussaisia_arguta            1
+	Santalum_acuminatum           1
+	Buxus_sempervirens            1
+	Banksia_attenuata             1
+	Banksia_menziesii             1
+	Embothrium_coccineum          1
+	Gevuina_avellana              1
+	Grevillea_buxifolia           1
+	Grevillea_speciosa            1
+	Lambertia_formosa             1
+	Xylomelum_pyriforme           1
+	Lomatia_hirsuta               1
+	Lomatia_silaifolia            1
+	Protea_acaulos                1
+	Protea_neriifolia             1
+	Protea_nitida                 1
+	Protea_repens                 1
+	Stirlingia_latifolia          2
+	Hakea_dactyloides             3
+	Hakea_tephrosperma            1
+	Hakea_teretifolia             1
+	Caulophyllum_thalictroides    2
+	Podophyllum_peltatum          2
+	Anemone_cylindrica            2
+	Helleborus_foetidus           1
+	Helleborus_lividus            1
+	Paeonia_cambessedesii         1
+	Sanguinaria_canadensis        2
+	Annona_coriacea               1
+	Duguetia_furfuracea           1
+	Liriodendron_tulipifera       1
+	Magnolia_obovata              1
+	Cinnamomum_japonicum          1
+	Cryptocarya_alba              1
+	Machilus_thunbergii           1
+	Neolitsea_sericea             1
+	Ocotea_costulata              1
+	Persea_borbonia               1
+	Persea_lingue                 1
+	Umbellularia_californica      1
+	Laurelia_philippiana          1
+	Piper_aequale                 1
+	Piper_amalago                 1
+	Piper_auritum                 1
+	Piper_hispidum                1
+	Piper_umbellatum              2
+	Drimys_piperita               1
+	Drimys_winter                 1
+	Anigozanthos_humilis          3
+	Calathea_inocephala           1
+	Pleiostachya_pruinosa         1
+	Aegilops_geniculata           3
+	Agropyron_repens              3
+	Agrostis_scabra               3
+	Andropogon_gerardi            3
+	Avenula_bromoides             3
+	Avenula_crassifolia           3
+	Bouteloua_curtipendula        3
+	Brachypodium_distachyon       3
+	Brachypodium_phoenicoides     3
+	Bromus_erectus                3
+	Bromus_inermis                3
+	Bromus_lanceolatus            3
+	Stipa_spartea                 3
+	Panicum_capillare             3
+	Panicum_virgatum              3
+	Calamagrostis_canadensis      3
+	Calamovilfa_longifolia        3
+	Dactylis_glomerata            3
+	Hierochloe_alpina             3
+	Koeleria_cristata             3
+	Phleum_pratense               3
+	Poa_pratensis                 3
+	Sorghastrum_nutans            3
+	Gladiolus_caryophyllaceus     3
+	Patersonia_occidentalis       3
+	Erythronium_americanum        3
+	Urginea_maritima              3
+	Veratrum_parviflorum          3
+	Trillium_grandiflora          3
+	Freycinetia_arborea           3
+	Illicium_anisatum             1
+
+;
+
+END;
+BEGIN TREES;
+	Title Phylocom_Phylogenies;
+	LINK Taxa = Phylocom_Phylogeny_Taxa;
+	TRANSLATE
+		1 Aextoxicon_punctatum,
+		2 Amaranthus_blitoides,
+		3 Amaranthus_retroflexus,
+		4 Atriplex_canescens,
+		5 Atriplex_halimus,
+		6 Atriplex_stipitata,
+		7 Beta_vulgaris,
+		8 Chenopodium_album,
+		9 Chenopodium_oahuense,
+		10 Neea_obovata,
+		11 Oxyria_digyna,
+		12 Polygonum_bistorta,
+		13 Polygonum_pensylvanicum,
+		14 Polygonum_viviparum,
+		15 Rheum_acuminatum,
+		16 Rheum_nobile,
+		17 Dillenia_suffruticosa,
+		18 Hibbertia_bracteata,
+		19 Hibbertia_huegelii,
+		20 Hibbertia_subvaginata,
+		21 Anacardium_excelsum,
+		22 Buchanania_obovata,
+		23 Pistacia_lentiscus,
+		24 Pistacia_terebinthus,
+		25 Rhus_sandwicensis,
+		26 Rhus_tomentosa,
+		27 Toxicodendron_diversiloba,
+		28 Synoum_glandulosum,
+		29 Cneorum_tricoccon,
+		30 Correa_reflexa,
+		31 Philotheca_difformis,
+		32 Acer_campestre,
+		33 Acer_mono,
+		34 Acer_monspessulanum,
+		35 Acer_palmatum,
+		36 Acer_pensylvanicum,
+		37 Acer_platanoides,
+		38 Acer_pseudoplatanus,
+		39 Acer_rubrum,
+		40 Acer_saccharum,
+		41 Dodonaea_viscosa,
+		42 Capparis_spinosa,
+		43 Capparis_verrucosa,
+		44 Dentaria_laciniata,
+		45 Morisonia_americana,
+		46 Cistus_albidus,
+		47 Cistus_monspeliensis,
+		48 Cistus_salvifolius,
+		49 Abutilon_theophrasti,
+		50 Brachychiton_populneus,
+		51 Lasiopetalum_ferrugineum,
+		52 Lavatera_cretica,
+		53 Luehea_seemannii,
+		54 Malvastrum_rotundifolium,
+		55 Pseudobombax_septenatum,
+		56 Tilia_cordata,
+		57 Tilia_japonica,
+		58 Dirca_occidentalis,
+		59 Pimelea_linifolia,
+		60 Pimelea_microcephala,
+		61 Alnus_hirsuta,
+		62 Alnus_incana,
+		63 Alnus_japonica,
+		64 Betula_davurica,
+		65 Betula_ermanii,
+		66 Betula_glandulosa,
+		67 Betula_maximowicziana,
+		68 Betula_nana,
+		69 Betula_nigra,
+		70 Betula_papyrifera,
+		71 Betula_pendula,
+		72 Betula_platyphylla,
+		73 Betula_populifolia,
+		74 Betula_pubescens,
+		75 Betula_pumila,
+		76 Carpinus_betulus,
+		77 Carpinus_cordata,
+		78 Corylus_americana,
+		79 Ostrya_japonica,
+		80 Carya_ovata,
+		81 Juglans_nigra,
+		82 Comptonia_peregrina,
+		83 Castanea_dentata,
+		84 Castanopsis_sieboldii,
+		85 Quercus_acuta,
+		86 Quercus_alba,
+		87 Quercus_austrina,
+		88 Quercus_chapmanii,
+		89 Quercus_coccifera,
+		90 Quercus_coccinea,
+		91 Quercus_ellipsoidalis,
+		92 Quercus_faginea,
+		93 Quercus_falcata,
+		94 Quercus_geminata,
+		95 Quercus_hemisphaerica,
+		96 Quercus_humilis,
+		97 Quercus_ilex,
+		98 Quercus_incana,
+		99 Quercus_laevis,
+		100 Quercus_laurifolia,
+		101 Quercus_macrocarpa,
+		102 Quercus_margaretta,
+		103 Quercus_michauxii,
+		104 Quercus_minima,
+		105 Quercus_mongolica,
+		106 Quercus_myrsinaefolia,
+		107 Quercus_myrtifolia,
+		108 Quercus_nigra,
+		109 Quercus_pubescens,
+		110 Quercus_pumila,
+		111 Quercus_pyrenaica,
+		112 Quercus_robur,
+		113 Quercus_rotundifolia,
+		114 Quercus_rubra,
+		115 Quercus_shumardii,
+		116 Quercus_stellata,
+		117 Quercus_suber,
+		118 Quercus_virginiana,
+		119 Fagus_grandifolia,
+		120 Fagus_sylvatica,
+		121 Nothofagus_betuloides,
+		122 Nothofagus_dombeyi,
+		123 Eleagnus_angustifolia,
+		124 Castilla_elastica,
+		125 Ficus_obtusifolia,
+		126 Ficus_racemosa,
+		127 Ficus_scobina,
+		128 Cecropia_ficifolia,
+		129 Cecropia_longipes,
+		130 Urera_caracasana,
+		131 Urtica_atrovirens,
+		132 Celtis_occidentalis,
+		133 Trema_tomentosa,
+		134 Ulmus_americana,
+		135 Ulmus_davidiana,
+		136 Ulmus_laciniata,
+		137 Ceanothus_cuneatus,
+		138 Ceanothus_oliganthus,
+		139 Pomaderris_ferruginea,
+		140 Rhamnus_alaternus,
+		141 Rhamnus_californica,
+		142 Rhamnus_cathartica,
+		143 Rhamnus_crocea,
+		144 Rhamnus_ludovicisalvatoris,
+		145 Amelanchier_alnifolia,
+		146 Aronia_melanocarpa,
+		147 Cercocarpus_betuloides,
+		148 Crataegus_monogyna,
+		149 Dryas_integrifolia,
+		150 Geum_montanum,
+		151 Geum_reptans,
+		152 Geum_rivale,
+		153 Heteromeles_arbutifolia,
+		154 Holodiscus_discolor,
+		155 Photinia_davidiana,
+		156 Potentilla_anserina,
+		157 Potentilla_arguta,
+		158 Potentilla_crantzii,
+		159 Potentilla_peduncularis,
+		160 Prunus_ilicifolia,
+		161 Prunus_mahaleb,
+		162 Prunus_sargentii,
+		163 Prunus_serotina,
+		164 Prunus_spinosa,
+		165 Prunus_ssiori,
+		166 Pyrus_bourgaeana,
+		167 Rosa_micrantha,
+		168 Rubus_chamaemorus,
+		169 Rubus_corylifolius,
+		170 Rubus_hispidus,
+		171 Sanguisorba_minor,
+		172 Sorbus_alnifolia,
+		173 Sorbus_commixta,
+		174 Spiraea_alba,
+		175 Spiraea_tomentosa,
+		176 Acacia_auriculiformis,
+		177 Acacia_doratoxylon,
+		178 Acacia_floribunda,
+		179 Acacia_oswaldii,
+		180 Acacia_suaveolens,
+		181 Senna_artemisioides,
+		182 Desmodium_canadense,
+		183 Lonchocarpus_dipteroneurus,
+		184 Lotus_scoparius,
+		185 Robinia_pseudoacacia,
+		186 Lupinus_perennis,
+		187 Sophora_chrysophylla,
+		188 Amorpha_canescens,
+		189 Anagyris_foetida,
+		190 Astragalus_candensis,
+		191 Baptisia_leucophaea,
+		192 Bowdichia_virgilioides,
+		193 Ceratonia_siliqua,
+		194 Chamaedaphne_calyculata,
+		195 Eperua_purpurea,
+		196 Gompholobium_grandiflorum,
+		197 Lespedeza_capitata,
+		198 Maackia_amurensis,
+		199 Medicago_minima,
+		200 Petalostemum_purpureum,
+		201 Petalostemum_villosum,
+		202 Phyllota_phylicoides,
+		203 Pithecellobium_dulce,
+		204 Pultenaea_daphnoides,
+		205 Pultenaea_flexilis,
+		206 Trifolium_repens,
+		207 Caryocar_brasiliense,
+		208 Licania_heteromorpha,
+		209 Caraipa_heterocarpa,
+		210 Hypericum_balearicum,
+		211 Kielmeyera_coriacea,
+		212 Vismia_japurensis,
+		213 Vismia_lauriformis,
+		214 Aporosa_bracteosa,
+		215 Aporosa_lunata,
+		216 Aporosa_microstachya,
+		217 Euphorbia_margalidiana,
+		218 Macaranga_heynei,
+		219 Macaranga_triloba,
+		220 Mallotus_paniculatus,
+		221 Manihot_esculenta,
+		222 Micrandra_sprucei,
+		223 Goupia_glabra,
+		224 Populus_deltoides,
+		225 Populus_fremontii,
+		226 Populus_grandidentata,
+		227 Populus_maximowiczii,
+		228 Populus_sieboldii,
+		229 Populus_tremuloides,
+		230 Salix_fragilis,
+		231 Salix_glauca,
+		232 Salix_hultenii,
+		233 Salix_planifolia,
+		234 Salix_pulchra,
+		235 Salix_reticulata,
+		236 Viola_jaubertiana,
+		237 Maytenus_oleoides,
+		238 Connarus_suberosus,
+		239 Eucryphia_cordifolia,
+		240 Terminalia_ferdinandiana,
+		241 Clidemia_sericea,
+		242 Melastoma_malabathricum,
+		243 Miconia_albicans,
+		244 Miconia_dispar,
+		245 Miconia_ligustroides,
+		246 Calytrix_flavescens,
+		247 Campomanesia_aromatica,
+		248 Corymbia_gummifera,
+		249 Eucalyptus_haemostoma,
+		250 Melaleuca_leucadendra,
+		251 Melaleuca_viridiflora,
+		252 Metrosideros_polymorpha,
+		253 Syncarpia_glomulifera,
+		254 Syzygium_houttuynii,
+		255 Syzygium_suborbiculare,
+		256 Leptospermum_polygalifolium,
+		257 Leptospermum_trinervium,
+		258 Myrceugenia_planipes,
+		259 Regelia_ciliata,
+		260 Scholtzia_involucrata,
+		261 Verticordia_nitens,
+		262 Xanthostemon_paradoxus,
+		263 Camissonia_brevipes,
+		264 Camissonia_claviformis,
+		265 Cercidiphyllum_japonicum,
+		266 Ribes_californicum,
+		267 Ribes_uvacrispa,
+		268 Itea_virginica,
+		269 Bupleurum_rigidum,
+		270 Carum_carvi,
+		271 Daucus_carota,
+		272 Eryngium_campestre,
+		273 Ligusticum_mutellina,
+		274 Astrotricha_floccosa,
+		275 Cheirodendron_trigynum,
+		276 Didymopanax_morototoni,
+		277 Didymopanax_vinosum,
+		278 Achillea_erba,
+		279 Achillea_millefolium,
+		280 Ambrosia_artemisiifolia,
+		281 Ambrosia_trifida,
+		282 Artemisia_tridentata,
+		283 Aster_azureus,
+		284 Aster_ericoides,
+		285 Aster_novaeangliae,
+		286 Baccharis_pilularis,
+		287 Chrysanthemum_leucanthemum,
+		288 Cichorium_intybus,
+		289 Crepis_triasii,
+		290 Dittrichia_viscosa,
+		291 Echinacea_purpurea,
+		292 Echinops_ritro,
+		293 Erigeron_uniflorus,
+		294 Eupatorium_rugosum,
+		295 Gutierrezia_sarothrae,
+		296 Helianthus_microcephalus,
+		297 Helichrysum_apiculatum,
+		298 Liatris_aspera,
+		299 Petasites_frigidus,
+		300 Piptocarpha_rotundifolia,
+		301 Pterocaulon_pycnostachyum,
+		302 Silphium_integrifolium,
+		303 Silphium_terebinthinaceum,
+		304 Solidago_nemoralis,
+		305 Solidago_rigida,
+		306 Taraxacum_alpinum,
+		307 Taraxacum_officinale,
+		308 Lonicera_bella,
+		309 Sambucus_mexicana,
+		310 Viburnum_cassinoides,
+		311 Viburnum_tinus,
+		312 Cephalaria_squamiflora,
+		313 Ilex_verticillata,
+		314 Aspidosperma_album,
+		315 Aspidosperma_tomentosum,
+		316 Wrightia_pubescens,
+		317 Asclepias_syriaca,
+		318 Asclepias_tuberosa,
+		319 Pittoniotis_trichantha,
+		320 Coprosma_ochracea,
+		321 Psychotria_limonensis,
+		322 Psychotria_marginata,
+		323 Retiniphyllum_truncatum,
+		324 Rubia_peregrina,
+		325 Mansoa_verrucifera,
+		326 Agastache_foeniculum,
+		327 Calamintha_nepeta,
+		328 Lavandula_dentata,
+		329 Lavandula_latifolia,
+		330 Lepechinia_calycina,
+		331 Phlomis_italica,
+		332 Teucrium_chamaedrys,
+		333 Pinguicula_vulgaris,
+		334 Myoporum_sandwicense,
+		335 Fraxinus_americana,
+		336 Fraxinus_angustifolia,
+		337 Fraxinus_mandshurica,
+		338 Phillyrea_latifolia,
+		339 Plantago_lanceolata,
+		340 Mimulus_aurantiacus,
+		341 Penstemon_grandiflorus,
+		342 Picrorhiza_scrophulariiflora,
+		343 Verbascum_sinuatum,
+		344 Vitex_agnuscastus,
+		345 Convolvulus_arvensis,
+		346 Datura_stramonium,
+		347 Solanum_ferocissimum,
+		348 Eriodictyon_californicum,
+		349 Clethra_alnifolia,
+		350 Cyrilla_racemiflora,
+		351 Andromeda_glaucophylla,
+		352 Arbutus_menziesii,
+		353 Arbutus_unedo,
+		354 Arctostaphylos_tomentosa,
+		355 Arctostaphylos_uvaursi,
+		356 Arctous_alpina,
+		357 Astroloma_xerophyllum,
+		358 Conostephium_pendulum,
+		359 Gaylussacia_baccata,
+		360 Kalmia_angustifolia,
+		361 Kalmia_latifolia,
+		362 Kalmia_polifolia,
+		363 Ledum_groenlandicum,
+		364 Ledum_palustre,
+		365 Leucothoe_racemosa,
+		366 Lyonia_lucida,
+		367 Rhododendron_anthopogon,
+		368 Rhododendron_maximum,
+		369 Vaccinium_arboreum,
+		370 Vaccinium_corymbosum,
+		371 Vaccinium_myrtilloides,
+		372 Vaccinium_myrtillus,
+		373 Vaccinium_uliginosum,
+		374 Vaccinium_vitisidaea,
+		375 Galax_aphylla,
+		376 Styrax_camporum,
+		377 Diospyros_cauliflora,
+		378 Planchonia_careya,
+		379 Maesa_japonica,
+		380 Myrsine_lessertiana,
+		381 Primula_elatior,
+		382 Camellia_japonica,
+		383 Cleyera_japonica,
+		384 Cornus_contraversa,
+		385 Cornus_florida,
+		386 Cornus_racemosa,
+		387 Broussaisia_arguta,
+		388 Santalum_acuminatum,
+		389 Buxus_sempervirens,
+		390 Banksia_attenuata,
+		391 Banksia_menziesii,
+		392 Embothrium_coccineum,
+		393 Gevuina_avellana,
+		394 Grevillea_buxifolia,
+		395 Grevillea_speciosa,
+		396 Lambertia_formosa,
+		397 Xylomelum_pyriforme,
+		398 Lomatia_hirsuta,
+		399 Lomatia_silaifolia,
+		400 Protea_acaulos,
+		401 Protea_neriifolia,
+		402 Protea_nitida,
+		403 Protea_repens,
+		404 Stirlingia_latifolia,
+		405 Hakea_dactyloides,
+		406 Hakea_tephrosperma,
+		407 Hakea_teretifolia,
+		408 Caulophyllum_thalictroides,
+		409 Podophyllum_peltatum,
+		410 Anemone_cylindrica,
+		411 Helleborus_foetidus,
+		412 Helleborus_lividus,
+		413 Paeonia_cambessedesii,
+		414 Sanguinaria_canadensis,
+		415 Annona_coriacea,
+		416 Duguetia_furfuracea,
+		417 Liriodendron_tulipifera,
+		418 Magnolia_obovata,
+		419 Cinnamomum_japonicum,
+		420 Cryptocarya_alba,
+		421 Machilus_thunbergii,
+		422 Neolitsea_sericea,
+		423 Ocotea_costulata,
+		424 Persea_borbonia,
+		425 Persea_lingue,
+		426 Umbellularia_californica,
+		427 Laurelia_philippiana,
+		428 Piper_aequale,
+		429 Piper_amalago,
+		430 Piper_auritum,
+		431 Piper_hispidum,
+		432 Piper_umbellatum,
+		433 Drimys_piperita,
+		434 Drimys_winter,
+		435 Anigozanthos_humilis,
+		436 Calathea_inocephala,
+		437 Pleiostachya_pruinosa,
+		438 Aegilops_geniculata,
+		439 Agropyron_repens,
+		440 Agrostis_scabra,
+		441 Andropogon_gerardi,
+		442 Avenula_bromoides,
+		443 Avenula_crassifolia,
+		444 Bouteloua_curtipendula,
+		445 Brachypodium_distachyon,
+		446 Brachypodium_phoenicoides,
+		447 Bromus_erectus,
+		448 Bromus_inermis,
+		449 Bromus_lanceolatus,
+		450 Stipa_spartea,
+		451 Panicum_capillare,
+		452 Panicum_virgatum,
+		453 Calamagrostis_canadensis,
+		454 Calamovilfa_longifolia,
+		455 Dactylis_glomerata,
+		456 Hierochloe_alpina,
+		457 Koeleria_cristata,
+		458 Phleum_pratense,
+		459 Poa_pratensis,
+		460 Sorghastrum_nutans,
+		461 Gladiolus_caryophyllaceus,
+		462 Patersonia_occidentalis,
+		463 Erythronium_americanum,
+		464 Urginea_maritima,
+		465 Veratrum_parviflorum,
+		466 Trillium_grandiflora,
+		467 Freycinetia_arborea,
+		468 Illicium_anisatum;
+	TREE phylo_from_file_x = ((((((1:124.0,(((((2:7.222221,3:26.222214)Amaranthus:7.222221,(4:16.722218,5:16.722218,6:16.722218)Atriplex:16.722218,7:33.444435,(8:16.722218,9:16.722218)Chenopodium:16.722218)Amaranthaceae:7.222221,10:27.666664):43.333336,(11:18.666666,(12:23.333334,13:23.333334,14:23.333334)Polygonum:23.333334,(15:23.333334,16:23.333334)Rheum:23.333334)Polygonaceae:37.333332)Caryophyllales:20.0,(17:52.0,(18:26.0,19:26.0,20:26.0)Hibbertia:26.0)Dilleniaceae:52.0):20.0,(((((21:25.5,22:25.5,(23:12.75,24:12.75)Pistacia:12.75,(25:12.75,26:12.75)Rhus:12.75,27:25.5)Anacardiaceae:35.5,(28:46.333332,(29:39.0,30:39.0,31:39.0)Rutaceae:7.333332):14.666669,((32:18.0,33:18.0,34:18.0,35:18.0,36:18.0,37:18.0,38:18.0,39:18.0,40:18.0)Acer:18.0,41:36.0)Sapindaceae:25.0)Sapindales:34.0,((42:4.583333,43:28.583334)Capparis:4.583333,44:33.166668,45:33.166668)Brassicaceae:61.833336,(((46:12.95238,47:12.952386,48:12.952386)Cistus:32.380951,(49:34.0,50:34.0,51:34.0,52:34.0,53:34.0,54:34.0,55:34.0,(56:4.25,57:4.25)Tilia:29.75)Malvaceae:11.333332):11.333332,(58:26.0,(59:13.0,60:13.0)Pimelea:13.0)Thymelaeaceae:30.666664):38.333332)eurosid2:10.666664,(((((((61:9.5,62:9.5,63:9.5)Alnus:9.5,(64:9.5,65:9.5,66:9.5,67:9.5,68:9.5,69:9.5,70:9.5,71:9.5,72:9.5,73:9.5,74:9.5,75:9.5)Betula:9.5,(76:9.5,77:9.5)Carpinus:9.5,78:19.0,79:19.0)Betulaceae:21.375,(80:6.0,81:6.0)Juglandaceae:34.375,82:40.375):7.125,((83:17.0,84:17.0,(85:4.25,86:4.25,87:4.25,88:4.25,89:4.25,90:4.25,91:4.25,92:4.25,93:4.25,94:4.25,95:4.25,96:4.25,97:4.25,98:4.25,99:4.25,100:4.25,101:4.25,102:4.25,103:4.25,104:4.25,105:4.25,106:4.25,107:4.25,108:4.25,109:4.25,110:4.25,111:4.25,112:4.25,113:4.25,114:4.25,115:4.25,116:4.25,117:4.25,118:4.25)Quercus:12.75):17.0,(119:17.0,120:17.0)Fagus:17.0)Fagaceae:13.5):13.5,(121:15.25,122:15.25)Nothofagus:45.75)Fagales:27.5,((123:52.5,(((124:7.083333,(125:15.041667,126:15.041667,127:15.041667)Ficus:15.041667)Moraceae:3.541667,((128:11.0,129:11.0)Cecropia:11.0,130:22.0,131:22.0)Urticaceae:11.625):21.25,(132:36.583332,133:36.583336,(134:18.291668,135:18.291668,136:18.291668)Ulmus:18.291668)Ulmaceae:18.291666):10.625,(((137:22.0,138:22.0)Ceanothus:22.0,139:44.0)Ziziphoids:11.0,(140:6.875,141:6.875,142:6.875,143:6.875,144:6.875)Rhamnus:48.125004)Rhamnaceae:10.5):10.5,(145:19.333334,146:66.333336,147:66.333336,148:66.333336,149:66.333336,(150:33.166668,151:33.166668,152:33.166668)Geum:33.166668,153:66.333336,154:66.333336,155:66.333336,(156:33.166668,157:33.166668,158:33.166668,159:33.166668)Potentilla:33.166668,(160:33.166668,161:33.166668,162:33.166668,163:33.166668,164:33.166668,165:33.166668)Prunus:33.166668,166:66.333336,167:66.333336,(168:33.166668,169:33.166668,170:33.166668)Rubus:33.166668,171:66.333336,(172:33.166668,173:33.166668)Sorbus:33.166668,(174:33.166668,175:33.166668)Spiraea:33.166668)Rosaceae:9.666667)Rosales:12.5,((((176:9.428572,177:9.428576,178:9.428576,179:9.428576,180:9.428576)Acacia:21.999998,181:31.42857):12.57143,((182:24.0,183:24.0):8.0,(184:10.666667,185:10.666667):21.333332,(186:19.200001,187:19.200001):12.8):12.0):12.0,188:56.0,189:56.0,190:56.0,191:56.0,192:56.0,193:56.0,194:56.0,195:56.0,196:56.0,197:56.0,198:56.0,199:56.0,(200:28.0,201:28.0)Petalostemum:28.0,202:56.0,203:56.0,(204:28.0,205:28.0)Pultenaea:28.0,206:56.0)Fabaceae:32.5):9.5,((207:81.0,208:73.0,(209:54.0,210:54.0,211:54.0,(212:27.0,213:27.0)Vismia:27.0)Clusiaceae:27.0,((214:33.75,215:33.75,216:33.75)Aporosa:33.75,217:67.5,(218:33.75,219:33.75)Macaranga:33.75,220:67.5,221:67.5,222:67.5)Euphorbiaceae:13.5,223:81.0,((224:20.333334,225:40.333328,226:40.333328,227:40.333328,228:40.333328,229:40.333328)Populus:20.333334,(230:30.333332,231:30.333332,232:30.333332,233:30.333332,234:30.333332,235:30.333332)Salix:30.333332)Salicaceae:20.333334,236:81.0)Malpighiales:8.5,237:89.5,(238:77.0,239:77.0)Oxalidales:12.5):8.5)eurosid1:7.666664,(240:61.0,((241:44.0,242:44.0):17.600002,(243:30.799988,244:30.799988,245:30.799988)Miconia:30.799988)Melastomataceae:26.400002,(246:73.333313,247:73.333313,((248:44.0,249:44.0):14.666668,(250:14.666667,251:14.666677)Melaleuca:44.0,252:58.666668,253:58.666668,(254:9.777778,255:9.777764)Syzygium:48.888889):14.666668,(256:36.666656,257:36.666656)Leptospermum:36.666656,258:73.333313,259:73.333313,260:73.333313,261:73.333313,262:73.333336)Myrtaceae:14.666667,(263:14.166667,264:34.166664)Camissonia:53.833336)Myrtales:17.666664)rosid:15.33334,(265:111.0,((266:23.666666,267:23.66667)Ribes:67.333328,268:91.0):20.0)Saxifragales:10.0)subrosid:3.0,((((((269:6.0,270:39.0,271:39.0,272:39.0,273:39.0)Apiaceae:3.0,(274:26.0,275:26.0,(276:13.0,277:13.0)Didymopanax:13.0)Araliaceae:16.0):56.5,((278:2.944444,279:46.944427)Achillea:2.944444,(280:24.944435,281:24.944435)Ambrosia:24.944435,282:49.88887,(283:24.944435,284:24.944435,285:24.944435)Aster:24.944435,286:49.88887,287:49.88887,288:49.88887,289:49.88887,290:49.88887,291:49.88887,292:49.88887,293:49.88887,294:49.88887,295:49.88887,296:49.88887,297:49.88887,298:49.88887,299:49.88887,300:49.88887,301:49.88887,(302:24.944435,303:24.944435)Silphium:24.944435,(304:24.944435,305:24.944435)Solidago:24.944435,(306:24.944435,307:24.944435)Taraxacum:24.944435)Asteraceae:48.611111,((308:35.066666,309:35.066643,(310:17.533321,311:17.533321)Viburnum:17.533321)Caprifoliaceae:17.533333,312:42.599998):45.900005):8.5,313:107.0)euasterid2:5.0,((((314:9.0,315:9.0)Aspidosperma:9.0,316:18.0,(317:1.5,318:1.5)Asclepias:16.5)Apocynaceae:53.0,(319:10.0,320:66.0,(321:33.0,322:33.0)Psychotria:33.0,323:66.0,324:66.0)Rubiaceae:5.0)Gentianales:26.333336,((325:63.0,(326:26.666666,327:49.666668,(328:24.833334,329:24.833334)Lavandula:24.833334,330:49.666668,331:49.666668,332:49.666668)Lamiaceae:13.333333,333:63.0,334:63.0,((335:23.5,336:23.5,337:23.5)Fraxinus:23.5,338:47.0)Oleaceae:16.0,339:63.0,(340:42.0,341:42.0,342:42.0,343:42.0)Scrophulariaceae:21.0,344:63.0)Lamiales:24.666664,(345:58.0,(346:24.666666,347:65.666664)Solanaceae:12.333333)Solanales:9.666664):9.666672,348:38.333336):14.666667)euasterid1n2:5.0,((349:47.25,(350:29.625,(351:11.75,(352:11.875,353:11.875)Arbutus:11.875,(354:11.875,355:11.875)Arctostaphylos:11.875,356:23.75,357:23.75,358:23.75,359:23.75,(360:11.875,361:11.875,362:11.875)Kalmia:11.875,(363:11.875,364:11.875)Ledum:11.875,365:23.75,366:23.75,(367:11.875,368:11.875)Rhododendron:11.875,(369:11.875,370:11.875,371:11.875,372:11.875,373:11.875,374:11.875)Vaccinium:11.875)Ericaceae:5.875):17.625):35.25,(375:63.75,376:63.75):18.75,377:82.5,378:82.5,((379:16.5,380:16.5)Myrsinaceae:16.5,381:33.0):49.5,(382:41.25,383:41.25)Theaceae:41.25):34.5,((384:16.0,385:16.0,386:16.0)Cornus:85.0,387:23.0)Cornales:16.0)asterid:7.0,388:87.0)ber2ast:13.0,389:137.0,((((390:9.791667,391:9.791646)Banksia:19.583332,392:29.375,393:29.375,(394:4.895833,395:4.895854)Grevillea:24.479166,(396:14.6875,397:14.6875):14.6875,(398:14.6875,399:14.6875)Lomatia:14.6875):9.791668,((400:3.916667,401:3.916646,402:3.916646,403:3.916646)Protea:27.416666,404:31.333334):7.833334):7.833333,(405:23.5,406:23.5,407:23.5)Hakea:23.5)Proteaceae:90.0)bux2ast:10.0,(((408:25.0,409:69.0)Berberidaceae:12.5,(410:11.0,(411:38.0,412:38.0)Helleborus:38.0,413:76.0)Ranunculaceae:5.5):58.5,414:28.000004)Ranunculales:7.0)eudicot:14.0,((((415:26.0,416:26.0)Annonaceae:65.5,(417:70.0,418:70.0)Magnoliaceae:21.5):40.666656,((419:34.0,420:34.0,421:34.0,422:34.0,423:34.0,(424:17.0,425:17.0)Persea:17.0,426:34.0)Lauraceae:50.333336,427:84.333336):47.833317):19.166672,((428:21.5,429:21.5,430:21.5,431:21.5,432:21.5)Piper:120.166672,(433:21.0,434:21.0)Drimys:120.666672):9.666656)magnoliid:9.666667,((((435:77.546295,(436:13.0,437:36.0)Marantaceae:41.546295):9.546295,(438:12.0,439:12.0,440:12.0,441:12.0,(442:6.0,443:6.0)Avenula:6.0,444:12.0,((((445:1.636364,446:1.636342)Brachypodium:1.636364,(447:0.545455,448:0.545457,449:0.545457)Bromus:2.727273):2.181818,450:5.454546):3.272727,(451:0.935065,452:0.935052)Panicum:7.792208):3.272727,453:12.0,454:12.0,455:12.0,456:12.0,457:12.0,458:12.0,459:12.0,460:12.0)Poaceae:75.09259):29.685188,(461:16.666666,462:48.666668)Iridaceae:68.111115):9.777771,((463:16.0,464:64.0,465:64.0)Liliaceae:32.0,466:96.0)Liliales:30.55555,467:38.555546):34.444454)monocotneudicot:4.0,468:165.0)aus2ast:235.0)euphyllophyte:1.0;
+
+END;
+
+
+BEGIN ASSUMPTIONS;
+	TYPESET * UNTITLED   =  unord:  1;
+
+END;
+
+BEGIN MESQUITECHARMODELS;
+	ProbModelSet * UNTITLED   =  'Mk1 (est.)':  1;
+END;
+
+Begin MESQUITE;
+		MESQUITESCRIPTVERSION 2;
+		TITLE AUTO;
+		tell ProjectCoordinator;
+		timeSaved 1283781864044;
+		getEmployee #mesquite.minimal.ManageTaxa.ManageTaxa;
+		tell It;
+			setID 0 2700834138009109972;
+		endTell;
+		getEmployee #mesquite.charMatrices.ManageCharacters.ManageCharacters;
+		tell It;
+			setID 0 8326266897058089971;
+			mqVersion 273;
+			checksumv 0 2 145986769 null  getNumChars 1 numChars 1 getNumTaxa 468 numTaxa 468   short true   bits 14   states 14   sumSquaresStatesOnly 5256.0 sumSquares 5256.0   NumFiles 1 NumMatrices 1;
+			mqVersion;
+		endTell;
+		getWindow;
+		tell It;
+			suppress;
+			setResourcesState false false 147;
+			setPopoutState 400;
+			setExplanationSize 0;
+			setAnnotationSize 0;
+			setFontIncAnnot 0;
+			setFontIncExp 0;
+			setSize 1055 620;
+			setLocation 8 22;
+			setFont SanSerif;
+			setFontSize 10;
+			getToolPalette;
+			tell It;
+			endTell;
+			desuppress;
+		endTell;
+		getEmployee  #mesquite.minimal.ManageTaxa.ManageTaxa;
+		tell It;
+			showTaxa #2700834138009109972 #mesquite.lists.TaxonList.TaxonList;
+			tell It;
+				setTaxa #2700834138009109972;
+				getWindow;
+				tell It;
+					newAssistant  #mesquite.lists.DefaultTaxaOrder.DefaultTaxaOrder;
+					newAssistant  #mesquite.lists.TaxonListCurrPartition.TaxonListCurrPartition;
+					setExplanationSize 30;
+					setAnnotationSize 20;
+					setFontIncAnnot 0;
+					setFontIncExp 0;
+					setSize 908 553;
+					setLocation 8 22;
+					setFont SanSerif;
+					setFontSize 10;
+					getToolPalette;
+					tell It;
+					endTell;
+				endTell;
+				showWindow;
+				getEmployee #mesquite.lists.ColorTaxon.ColorTaxon;
+				tell It;
+					setColor Red;
+					removeColor off;
+				endTell;
+				getEmployee #mesquite.lists.TaxonListAnnotPanel.TaxonListAnnotPanel;
+				tell It;
+					togglePanel off;
+				endTell;
+			endTell;
+		endTell;
+		getEmployee  #mesquite.trees.BasicTreeWindowCoord.BasicTreeWindowCoord;
+		tell It;
+			makeTreeWindow #2700834138009109972  #mesquite.trees.BasicTreeWindowMaker.BasicTreeWindowMaker;
+			tell It;
+				suppressEPCResponse;
+				setTreeSource  #mesquite.trees.StoredTrees.StoredTrees;
+				tell It;
+					setTreeBlock 1;
+					toggleUseWeights off;
+				endTell;
+				setAssignedID 1975.1280194327313.5419304610406516692;
+				getTreeWindow;
+				tell It;
+					setExplanationSize 30;
+					setAnnotationSize 20;
+					setFontIncAnnot 0;
+					setFontIncExp 0;
+					setSize 908 553;
+					setLocation 8 22;
+					setFont SanSerif;
+					setFontSize 10;
+					getToolPalette;
+					tell It;
+						setTool mesquite.trees.BasicTreeWindowMaker.BasicTreeWindow.arrow;
+					endTell;
+					setActive;
+					getTreeDrawCoordinator #mesquite.trees.BasicTreeDrawCoordinator.BasicTreeDrawCoordinator;
+				tell It;
+					suppress;
+					setTreeDrawer  #mesquite.trees.SquareTree.SquareTree;
+					tell It;
+						setNodeLocs #mesquite.trees.NodeLocsStandard.NodeLocsStandard;
+						tell It;
+							branchLengthsToggle on;
+							toggleScale on;
+							toggleBroadScale off;
+							toggleCenter on;
+							toggleEven on;
+						endTell;
+						setEdgeWidth 6;
+						orientUp;
+						setCornerMode Right_Angle  50;
+					endTell;
+					setBackground White;
+					setBranchColor Black;
+					showNodeNumbers off;
+					showBranchColors on;
+					labelBranchLengths off;
+					centerBrLenLabels on;
+					showBrLensUnspecified on;
+					showBrLenLabelsOnTerminals on;
+					setBrLenLabelColor 0 0 255;
+					setNumBrLenDecimals 6;
+					desuppress;
+					getEmployee #mesquite.trees.BasicDrawTaxonNames.BasicDrawTaxonNames;
+					tell It;
+						setColor Black;
+						toggleColorPartition on;
+						toggleShadePartition off;
+						toggleShowFootnotes on;
+						toggleNodeLabels on;
+						toggleCenterNodeNames off;
+						toggleShowNames on;
+						namesAngle ?;
+					endTell;
+				endTell;
+					setTreeNumber 1;
+					setTree '((((((((((1:124.0,(((((((2:7.222221,3:26.222214)Amaranthus:7.222221,((4:16.722218,5:16.722218):0.0,6:16.722218)Atriplex:16.722218):0.0,7:33.444435):0.0,(8:16.722218,9:16.722218)Chenopodium:16.722218)Amaranthaceae:7.222221,10:27.666664):43.333336,((11:18.666666,((12:23.333334,13:23.333334):0.0,14:23.333334)Polygonum:23.333334):0.0,(15:23.333334,16:23.333334)Rheum:23.333334)Polygonaceae:37.333332)Caryophyllales:20.0,(17:52.0,((18:26.0,19:26.0):0.0,20:26.0)Hibbertia:26.0)Dilleniaceae:52.0):20.0):0.0,(((((((((((21:25.5,22:25.5):0.0,(23:12.75,24:12.75)Pistacia:12.75):0.0,(25:12.75,26:12.75)Rhus:12.75):0.0,27:25.5)Anacardiaceae:35.5,(28:46.333332,((29:39.0,30:39.0):0.0,31:39.0)Rutaceae:7.333332):14.666669):0.0,(((((((((32:18.0,33:18.0):0.0,34:18.0):0.0,35:18.0):0.0,36:18.0):0.0,37:18.0):0.0,38:18.0):0.0,39:18.0):0.0,40:18.0)Acer:18.0,41:36.0)Sapindaceae:25.0)Sapindales:34.0,(((42:4.583333,43:28.583334)Capparis:4.583333,44:33.166668):0.0,45:33.166668)Brassicaceae:61.833336):0.0,((((46:12.95238,47:12.952386):0.0,48:12.952386)Cistus:32.380951,(((((((49:34.0,50:34.0):0.0,51:34.0):0.0,52:34.0):0.0,53:34.0):0.0,54:34.0):0.0,55:34.0):0.0,(56:4.25,57:4.25)Tilia:29.75)Malvaceae:11.333332):11.333332,(58:26.0,(59:13.0,60:13.0)Pimelea:13.0)Thymelaeaceae:30.666664):38.333332)eurosid2:10.666664,(((((((((((((61:9.5,62:9.5):0.0,63:9.5)Alnus:9.5,(((((((((((64:9.5,65:9.5):0.0,66:9.5):0.0,67:9.5):0.0,68:9.5):0.0,69:9.5):0.0,70:9.5):0.0,71:9.5):0.0,72:9.5):0.0,73:9.5):0.0,74:9.5):0.0,75:9.5)Betula:9.5):0.0,(76:9.5,77:9.5)Carpinus:9.5):0.0,78:19.0):0.0,79:19.0)Betulaceae:21.375,(80:6.0,81:6.0)Juglandaceae:34.375):0.0,82:40.375):7.125,(((83:17.0,84:17.0):0.0,(((((((((((((((((((((((((((((((((85:4.25,86:4.25):0.0,87:4.25):0.0,88:4.25):0.0,89:4.25):0.0,90:4.25):0.0,91:4.25):0.0,92:4.25):0.0,93:4.25):0.0,94:4.25):0.0,95:4.25):0.0,96:4.25):0.0,97:4.25):0.0,98:4.25):0.0,99:4.25):0.0,100:4.25):0.0,101:4.25):0.0,102:4.25):0.0,103:4.25):0.0,104:4.25):0.0,105:4.25):0.0,106:4.25):0.0,107:4.25):0.0,108:4.25):0.0,109:4.25):0.0,110:4.25):0.0,111:4.25):0.0,112:4.25):0.0,113:4.25):0.0,114:4.25):0.0,115:4.25):0.0,116:4.25):0.0,117:4.25):0.0,118:4.25)Quercus:12.75):17.0,(119:17.0,120:17.0)Fagus:17.0)Fagaceae:13.5):13.5,(121:15.25,122:15.25)Nothofagus:45.75)Fagales:27.5,(((123:52.5,(((124:7.083333,((125:15.041667,126:15.041667):0.0,127:15.041667)Ficus:15.041667)Moraceae:3.541667,(((128:11.0,129:11.0)Cecropia:11.0,130:22.0):0.0,131:22.0)Urticaceae:11.625):21.25,((132:36.583332,133:36.583336):0.0,((134:18.291668,135:18.291668):0.0,136:18.291668)Ulmus:18.291668)Ulmaceae:18.291666):10.625):0.0,(((137:22.0,138:22.0)Ceanothus:22.0,139:44.0)Ziziphoids:11.0,((((140:6.875,141:6.875):0.0,142:6.875):0.0,143:6.875):0.0,144:6.875)Rhamnus:48.125004)Rhamnaceae:10.5):10.5,((((((((((((((((145:19.333334,146:66.333336):0.0,147:66.333336):0.0,148:66.333336):0.0,149:66.333336):0.0,((150:33.166668,151:33.166668):0.0,152:33.166668)Geum:33.166668):0.0,153:66.333336):0.0,154:66.333336):0.0,155:66.333336):0.0,(((156:33.166668,157:33.166668):0.0,158:33.166668):0.0,159:33.166668)Potentilla:33.166668):0.0,(((((160:33.166668,161:33.166668):0.0,162:33.166668):0.0,163:33.166668):0.0,164:33.166668):0.0,165:33.166668)Prunus:33.166668):0.0,166:66.333336):0.0,167:66.333336):0.0,((168:33.166668,169:33.166668):0.0,170:33.166668)Rubus:33.166668):0.0,171:66.333336):0.0,(172:33.166668,173:33.166668)Sorbus:33.166668):0.0,(174:33.166668,175:33.166668)Spiraea:33.166668)Rosaceae:9.666667)Rosales:12.5):0.0,(((((((((((((((((((((((176:9.428572,177:9.428576):0.0,178:9.428576):0.0,179:9.428576):0.0,180:9.428576)Acacia:21.999998,181:31.42857):12.57143,(((182:24.0,183:24.0):8.0,(184:10.666667,185:10.666667):21.333332):0.0,(186:19.200001,187:19.200001):12.8):12.0):12.0,188:56.0):0.0,189:56.0):0.0,190:56.0):0.0,191:56.0):0.0,192:56.0):0.0,193:56.0):0.0,194:56.0):0.0,195:56.0):0.0,196:56.0):0.0,197:56.0):0.0,198:56.0):0.0,199:56.0):0.0,(200:28.0,201:28.0)Petalostemum:28.0):0.0,202:56.0):0.0,203:56.0):0.0,(204:28.0,205:28.0)Pultenaea:28.0):0.0,206:56.0)Fabaceae:32.5):9.5,((((((((207:81.0,208:73.0):0.0,(((209:54.0,210:54.0):0.0,211:54.0):0.0,(212:27.0,213:27.0)Vismia:27.0)Clusiaceae:27.0):0.0,(((((((214:33.75,215:33.75):0.0,216:33.75)Aporosa:33.75,217:67.5):0.0,(218:33.75,219:33.75)Macaranga:33.75):0.0,220:67.5):0.0,221:67.5):0.0,222:67.5)Euphorbiaceae:13.5):0.0,223:81.0):0.0,((((((224:20.333334,225:40.333328):0.0,226:40.333328):0.0,227:40.333328):0.0,228:40.333328):0.0,229:40.333328)Populus:20.333334,(((((230:30.333332,231:30.333332):0.0,232:30.333332):0.0,233:30.333332):0.0,234:30.333332):0.0,235:30.333332)Salix:30.333332)Salicaceae:20.333334):0.0,236:81.0)Malpighiales:8.5,237:89.5):0.0,(238:77.0,239:77.0)Oxalidales:12.5):8.5)eurosid1:7.666664):0.0,(((240:61.0,((241:44.0,242:44.0):17.600002,((243:30.799988,244:30.799988):0.0,245:30.799988)Miconia:30.799988)Melastomataceae:26.400002):0.0,((((((((246:73.333313,247:73.333313):0.0,(((((248:44.0,249:44.0):14.666668,(250:14.666667,251:14.666677)Melaleuca:44.0):0.0,252:58.666668):0.0,253:58.666668):0.0,(254:9.777778,255:9.777764)Syzygium:48.888889):14.666668):0.0,(256:36.666656,257:36.666656)Leptospermum:36.666656):0.0,258:73.333313):0.0,259:73.333313):0.0,260:73.333313):0.0,261:73.333313):0.0,262:73.333336)Myrtaceae:14.666667):0.0,(263:14.166667,264:34.166664)Camissonia:53.833336)Myrtales:17.666664)rosid:15.33334,(265:111.0,((266:23.666666,267:23.66667)Ribes:67.333328,268:91.0):20.0)Saxifragales:10.0)subrosid:3.0):0.0,(((((((((((269:6.0,270:39.0):0.0,271:39.0):0.0,272:39.0):0.0,273:39.0)Apiaceae:3.0,((274:26.0,275:26.0):0.0,(276:13.0,277:13.0)Didymopanax:13.0)Araliaceae:16.0):56.5,(((((((((((((((((((((((278:2.944444,279:46.944427)Achillea:2.944444,(280:24.944435,281:24.944435)Ambrosia:24.944435):0.0,282:49.88887):0.0,((283:24.944435,284:24.944435):0.0,285:24.944435)Aster:24.944435):0.0,286:49.88887):0.0,287:49.88887):0.0,288:49.88887):0.0,289:49.88887):0.0,290:49.88887):0.0,291:49.88887):0.0,292:49.88887):0.0,293:49.88887):0.0,294:49.88887):0.0,295:49.88887):0.0,296:49.88887):0.0,297:49.88887):0.0,298:49.88887):0.0,299:49.88887):0.0,300:49.88887):0.0,301:49.88887):0.0,(302:24.944435,303:24.944435)Silphium:24.944435):0.0,(304:24.944435,305:24.944435)Solidago:24.944435):0.0,(306:24.944435,307:24.944435)Taraxacum:24.944435)Asteraceae:48.611111):0.0,(((308:35.066666,309:35.066643):0.0,(310:17.533321,311:17.533321)Viburnum:17.533321)Caprifoliaceae:17.533333,312:42.599998):45.900005):8.5,313:107.0)euasterid2:5.0,((((((314:9.0,315:9.0)Aspidosperma:9.0,316:18.0):0.0,(317:1.5,318:1.5)Asclepias:16.5)Apocynaceae:53.0,((((319:10.0,320:66.0):0.0,(321:33.0,322:33.0)Psychotria:33.0):0.0,323:66.0):0.0,324:66.0)Rubiaceae:5.0)Gentianales:26.333336,((((((((325:63.0,(((((326:26.666666,327:49.666668):0.0,(328:24.833334,329:24.833334)Lavandula:24.833334):0.0,330:49.666668):0.0,331:49.666668):0.0,332:49.666668)Lamiaceae:13.333333):0.0,333:63.0):0.0,334:63.0):0.0,(((335:23.5,336:23.5):0.0,337:23.5)Fraxinus:23.5,338:47.0)Oleaceae:16.0):0.0,339:63.0):0.0,(((340:42.0,341:42.0):0.0,342:42.0):0.0,343:42.0)Scrophulariaceae:21.0):0.0,344:63.0)Lamiales:24.666664,(345:58.0,(346:24.666666,347:65.666664)Solanaceae:12.333333)Solanales:9.666664):9.666672):0.0,348:38.333336):14.666667)euasterid1n2:5.0,((((((349:47.25,(350:29.625,((((((((((((351:11.75,(352:11.875,353:11.875)Arbutus:11.875):0.0,(354:11.875,355:11.875)Arctostaphylos:11.875):0.0,356:23.75):0.0,357:23.75):0.0,358:23.75):0.0,359:23.75):0.0,((360:11.875,361:11.875):0.0,362:11.875)Kalmia:11.875):0.0,(363:11.875,364:11.875)Ledum:11.875):0.0,365:23.75):0.0,366:23.75):0.0,(367:11.875,368:11.875)Rhododendron:11.875):0.0,(((((369:11.875,370:11.875):0.0,371:11.875):0.0,372:11.875):0.0,373:11.875):0.0,374:11.875)Vaccinium:11.875)Ericaceae:5.875):17.625):35.25,(375:63.75,376:63.75):18.75):0.0,377:82.5):0.0,378:82.5):0.0,((379:16.5,380:16.5)Myrsinaceae:16.5,381:33.0):49.5):0.0,(382:41.25,383:41.25)Theaceae:41.25):34.5):0.0,(((384:16.0,385:16.0):0.0,386:16.0)Cornus:85.0,387:23.0)Cornales:16.0)asterid:7.0):0.0,388:87.0)ber2ast:13.0,389:137.0):0.0,((((((((390:9.791667,391:9.791646)Banksia:19.583332,392:29.375):0.0,393:29.375):0.0,(394:4.895833,395:4.895854)Grevillea:24.479166):0.0,(396:14.6875,397:14.6875):14.6875):0.0,(398:14.6875,399:14.6875)Lomatia:14.6875):9.791668,((((400:3.916667,401:3.916646):0.0,402:3.916646):0.0,403:3.916646)Protea:27.416666,404:31.333334):7.833334):7.833333,((405:23.5,406:23.5):0.0,407:23.5)Hakea:23.5)Proteaceae:90.0)bux2ast:10.0,(((408:25.0,409:69.0)Berberidaceae:12.5,((410:11.0,(411:38.0,412:38.0)Helleborus:38.0):0.0,413:76.0)Ranunculaceae:5.5):58.5,414:28.000004)Ranunculales:7.0)eudicot:14.0,((((415:26.0,416:26.0)Annonaceae:65.5,(417:70.0,418:70.0)Magnoliaceae:21.5):40.666656,(((((((419:34.0,420:34.0):0.0,421:34.0):0.0,422:34.0):0.0,423:34.0):0.0,(424:17.0,425:17.0)Persea:17.0):0.0,426:34.0)Lauraceae:50.333336,427:84.333336):47.833317):19.166672,(((((428:21.5,429:21.5):0.0,430:21.5):0.0,431:21.5):0.0,432:21.5)Piper:120.166672,(433:21.0,434:21.0)Drimys:120.666672):9.666656)magnoliid:9.666667):0.0,(((((435:77.546295,(436:13.0,437:36.0)Marantaceae:41.546295):9.546295,((((((((((((((438:12.0,439:12.0):0.0,440:12.0):0.0,441:12.0):0.0,(442:6.0,443:6.0)Avenula:6.0):0.0,444:12.0):0.0,((((445:1.636364,446:1.636342)Brachypodium:1.636364,((447:0.545455,448:0.545457):0.0,449:0.545457)Bromus:2.727273):2.181818,450:5.454546):3.272727,(451:0.935065,452:0.935052)Panicum:7.792208):3.272727):0.0,453:12.0):0.0,454:12.0):0.0,455:12.0):0.0,456:12.0):0.0,457:12.0):0.0,458:12.0):0.0,459:12.0):0.0,460:12.0)Poaceae:75.09259):29.685188,(461:16.666666,462:48.666668)Iridaceae:68.111115):9.777771,(((463:16.0,464:64.0):0.0,465:64.0)Liliaceae:32.0,466:96.0)Liliales:30.55555):0.0,467:38.555546):34.444454)monocotneudicot:239.0,468:400.0)euphyllophyte:1.0;';
+					setDrawingSizeMode 0;
+					toggleLegendFloat on;
+					scale 0;
+					toggleTextOnTree off;
+					showWindow;
+				endTell;
+				desuppressEPCResponse;
+				getEmployee #mesquite.trees.ColorBranches.ColorBranches;
+				tell It;
+					setColor Red;
+					removeColor off;
+				endTell;
+				getEmployee #mesquite.ornamental.BranchNotes.BranchNotes;
+				tell It;
+					setAlwaysOn off;
+				endTell;
+				getEmployee #mesquite.ornamental.ColorTreeByPartition.ColorTreeByPartition;
+				tell It;
+					colorByPartition off;
+				endTell;
+				getEmployee #mesquite.ornamental.DrawTreeAssocDoubles.DrawTreeAssocDoubles;
+				tell It;
+					setOn on;
+					setDigits 4;
+					writeAsPercentage off;
+					toggleCentred on;
+					toggleHorizontal on;
+					setFontSize 10;
+					setOffset 0  0;
+				endTell;
+				getEmployee #mesquite.trees.TreeInfoValues.TreeInfoValues;
+				tell It;
+					panelOpen false;
+				endTell;
+			endTell;
+		endTell;
+		getEmployee  #mesquite.charMatrices.BasicDataWindowCoord.BasicDataWindowCoord;
+		tell It;
+			showDataWindow #8326266897058089971 #mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindowMaker;
+			tell It;
+				getWindow;
+				tell It;
+					setExplanationSize 30;
+					setAnnotationSize 20;
+					setFontIncAnnot 0;
+					setFontIncExp 0;
+					setSize 908 553;
+					setLocation 8 22;
+					setFont SanSerif;
+					setFontSize 10;
+					getToolPalette;
+					tell It;
+					endTell;
+					setTool mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindow.arrow;
+					colorCells  #mesquite.charMatrices.NoColor.NoColor;
+					colorRowNames  #mesquite.charMatrices.TaxonGroupColor.TaxonGroupColor;
+					colorColumnNames  #mesquite.charMatrices.CharGroupColor.CharGroupColor;
+					colorText  #mesquite.charMatrices.NoColor.NoColor;
+					setBackground White;
+					toggleShowNames on;
+					toggleShowTaxonNames on;
+					toggleTight off;
+					toggleThinRows off;
+					toggleShowChanges on;
+					toggleSeparateLines off;
+					toggleShowStates on;
+					toggleAutoWCharNames on;
+					toggleAutoTaxonNames off;
+					toggleShowDefaultCharNames off;
+					toggleConstrainCW on;
+					toggleBirdsEye off;
+					toggleShowPaleGrid off;
+					toggleShowPaleCellColors off;
+					toggleShowBoldCellText off;
+					toggleAllowAutosize on;
+					toggleColorsPanel off;
+					toggleDiagonal on;
+					setDiagonalHeight 80;
+					toggleLinkedScrolling on;
+					toggleScrollLinkedTables off;
+				endTell;
+				showWindow;
+				getWindow;
+				tell It;
+					forceAutosize;
+				endTell;
+				getEmployee #mesquite.charMatrices.ColorByState.ColorByState;
+				tell It;
+					setStateLimit 9;
+					toggleUniformMaximum on;
+				endTell;
+				getEmployee #mesquite.charMatrices.ColorCells.ColorCells;
+				tell It;
+					setColor Red;
+					removeColor off;
+				endTell;
+				getEmployee #mesquite.categ.StateNamesStrip.StateNamesStrip;
+				tell It;
+					showStrip off;
+				endTell;
+				getEmployee #mesquite.charMatrices.AnnotPanel.AnnotPanel;
+				tell It;
+					togglePanel off;
+				endTell;
+				getEmployee #mesquite.charMatrices.CharReferenceStrip.CharReferenceStrip;
+				tell It;
+					showStrip off;
+				endTell;
+				getEmployee #mesquite.charMatrices.QuickKeySelector.QuickKeySelector;
+				tell It;
+					autotabOff;
+				endTell;
+				getEmployee #mesquite.charMatrices.SelSummaryStrip.SelSummaryStrip;
+				tell It;
+					showStrip off;
+				endTell;
+				getEmployee #mesquite.categ.SmallStateNamesEditor.SmallStateNamesEditor;
+				tell It;
+					panelOpen true;
+				endTell;
+			endTell;
+		endTell;
+		endTell;
+end;
+
+
