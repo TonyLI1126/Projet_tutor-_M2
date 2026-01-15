@@ -1,0 +1,426 @@
+
+
+
+
+```{r}
+library(ape)
+library(here)
+library(phylolm)
+library(geiger)
+library(readxl)
+library(tidyverse)
+
+```
+
+
+```{r}
+here()
+```
+L’objectif de ce travail est de reproduire les résultats d’ANOVA présentés dans l’article, en tenant compte de la structure phylogénétique entre espèces. Plus précisément, nous cherchons à tester l’effet du type de nervures foliaires (primaires et secondaires) sur différents traits du spectre économique foliaire.
+Pour reproduire les analyses de l’article, nous avons sélectionné l’arbre phylogénétique de Davies et al., qui constitue l’une des phylogénies de référence utilisées par les auteurs.
+
+Deux arbres distincts ont été utilisés :
+
+tree_svt3, correspondant à l’arbre phylogénétique pour le secondary vein type,
+
+tree_pvt, correspondant à l’arbre phylogénétique pour le primary vein type.
+Les données de traits foliaires proviennent de la base GLOPNET et sont regroupées dans la table tab. Cette table contient, pour chaque espèce, les variables nécessaires à l’analyse 
+
+
+Dans le cadre de cette étude, plusieurs analyses d’ANOVA phylogénétiques ont été réalisées afin d’évaluer l’effet du type de nervures foliaires sur différents traits fonctionnels. Pour le type de nervures primaires, trois caractéristiques ont été testées : la masse foliaire exprimée sur une base massique (A_mass), la masse foliaire par unité de surface (LMA) et la concentration en azote des feuilles (N_mass). Pour le type de nervures secondaires, l’analyse a porté sur la longévité des feuilles (LLS), ainsi que sur la LMA et la concentration en azote foliaire (N_mass). Ces traits ont été choisis car ils constituent des variables clés du spectre économique foliaire et sont précisément ceux analysés dans l’article de référence
+
+
+
+```{r}
+tree_svt3 = read.nexus(
+  here("arbre secondary vein type", "ajb20244-sup-0014.txt")
+)
+```
+
+
+
+```{r}
+tab = read_xls(here("trait phylo" , "41586_2004_BFnature02403_MOESM2_ESM.xls") , skip = 10)
+```
+
+
+
+
+```{r}
+plot(ladderize(tree_svt3),show.tip.label = FALSE)
+length(tree_svt3$tip.label)
+```
+
+
+
+```{r}
+head(tab)
+```
+
+On sélectionne seulement les variables  qui nous intéressent 
+
+```{r}
+trait = tab %>% 
+  select(Species , `log LL` , `log LMA` , `log Nmass` ,`log Amass` )
+
+```
+
+
+
+
+```{r}
+trait$Species = gsub(" ", "_", trait$Species)
+```
+
+```{r}
+sec = read.nexus.data(here("arbre secondary vein type","ajb20244-sup-0014.txt"))
+
+```
+
+```{r}
+secvein = unlist(sec)
+secvein_f = factor(
+  secvein,
+  levels = c("0","1","2"),
+  labels = c("closed","intermediate","open")
+)
+
+table(secvein_f, useNA = "ifany")
+
+```
+Dans un premier temps, les noms d’espèces ont été harmonisés afin d’assurer une correspondance exacte entre la base de données de traits et l’arbre phylogénétique. Le type de nervures secondaires a ensuite été extrait à partir de l’arbre phylogénétique de Davies et al. et codé sous forme de facteur catégoriel comprenant trois modalités : closed, intermediate et open. Cette étape permet de caractériser chaque espèce selon son type de nervures secondaires et constitue la base des analyses d’ANOVA phylogénétiques visant à tester l’effet de ce facteur sur les traits foliaires étudiés.
+
+
+
+
+```{r}
+sp_common = Reduce(
+  intersect,
+  list(tree_svt3$tip.label, trait$Species, names(secvein_f))
+)
+
+length(sp_common)   
+
+```
+ 
+
+
+
+```{r}
+tree2  = drop.tip(tree_svt3, setdiff(tree_svt3$tip.label, sp_common))
+trait2 = trait[match(tree2$tip.label, trait$Species), ]
+group2 = secvein_f[tree2$tip.label]
+```
+Avant de réaliser les analyses statistiques, seules les espèces communes à l’arbre phylogénétique, à la base de données de traits et au vecteur décrivant le type de nervures secondaires ont été conservées. Cette étape permet de garantir une correspondance stricte entre les données et la phylogénie utilisée. L’arbre phylogénétique a ensuite été élagué afin de ne conserver que ces espèces communes, et les données de traits ont été réordonnées de manière à correspondre exactement à l’ordre des feuilles de l’arbre. Le type de nervures secondaires a enfin été associé à chaque espèce conservée, préparant ainsi les données pour les analyses d’ANOVA phylogénétiques.
+
+```{r}
+ok = !is.na(trait2$`log LL`) & !is.na(group2)
+
+trait_ok = trait2[ok, ]
+group_ok = droplevels(group2[ok])
+
+tree_ok = drop.tip(tree2, tree2$tip.label[!ok])
+tree_ok$root.edge = 0
+
+df = data.frame(
+  y = trait_ok$`log LL`,
+  sec = group_ok,
+  row.names = tree_ok$tip.label
+)
+
+m_LLS = phylolm(y ~ sec, data = df, phy = tree_ok, model = "lambda")
+summary(m_LLS)
+
+```
+```{r}
+ok = !is.na(trait2$`log LMA`) & !is.na(group2)
+
+trait_ok = trait2[ok, ]
+group_ok = droplevels(group2[ok])
+
+tree_ok_lma = drop.tip(tree2, tree2$tip.label[!ok])
+tree_ok_lma$root.edge = 0
+
+df_lma = data.frame(
+  y = trait_ok$`log LMA`,
+  sec = group_ok,
+  row.names = tree_ok_lma$tip.label
+)
+
+m_LMA = phylolm(y ~ sec, data = df_lma, phy = tree_ok_lma, model = "lambda")
+summary(m_LMA)
+```
+```{r}
+ok = !is.na(trait2$`log Nmass`) & !is.na(group2)
+
+trait_ok = trait2[ok, ]
+group_ok = droplevels(group2[ok])
+
+tree_ok_nmass = drop.tip(tree2, tree2$tip.label[!ok])
+tree_ok_nmass$root.edge = 0
+
+df_nmass = data.frame(
+  y = trait_ok$`log Nmass`,
+  sec = group_ok,
+  row.names = tree_ok_nmass$tip.label
+)
+
+m_Nmass = phylolm(y ~ sec, data = df_nmass, phy = tree_ok_nmass, model = "lambda")
+summary(m_Nmass)
+
+```
+Pour chaque trait associé au type de nervures secondaires, une procédure identique a été appliquée. Les espèces présentant des valeurs manquantes pour le trait étudié ou pour le type de nervures ont d’abord été exclues. L’arbre phylogénétique a ensuite été élagué afin de ne conserver que les espèces restantes, garantissant une correspondance exacte entre les données et la phylogénie. Un modèle de régression phylogénétique a alors été ajusté afin de tenir compte de la dépendance évolutive entre espèces. Bien que des différences apparentes entre groupes puissent être suggérées à ce stade, l’interprétation biologique repose uniquement sur le calcul final de la statistique de test de l’ANOVA phylogénétique, qui permet de déterminer si ces différences sont statistiquement significatives après correction pour l’histoire évolutive.
+
+
+```{r}
+tree_pvt = read.nexus(
+  here("arbre primary vein type", "ajb20244-sup-0010.txt")
+)
+```
+
+
+```{r}
+length(tree_pvt$tip.label)
+```
+
+```{r}
+trait_pvt = tab %>%
+  select(Species, `log Amass`, `log LMA`, `log Nmass`) %>%
+  mutate(Species = gsub(" ", "_", Species)) 
+```
+
+
+```{r}
+pvt_raw = read.nexus.data(here("arbre primary vein type", "ajb20244-sup-0010.txt"))
+
+pvt = unlist(pvt_raw)
+
+pvt_f = factor(
+  pvt,
+  levels = c("1","2","3"),
+  labels = c("pinnate","palmate","parallel")
+)
+
+table(pvt_f, useNA = "ifany")
+```
+
+
+
+
+```{r}
+
+sp_common_pvt = Reduce(intersect, list(
+  tree_pvt$tip.label,
+  trait_pvt$Species,
+  names(pvt_f)
+))
+
+length(sp_common_pvt)  
+
+
+tree2_pvt = drop.tip(tree_pvt, setdiff(tree_pvt$tip.label, sp_common_pvt))
+
+
+trait2_pvt = trait_pvt[match(tree2_pvt$tip.label, trait_pvt$Species), ]
+grp2_pvt   = droplevels(pvt_f[tree2_pvt$tip.label])
+
+
+stopifnot(nrow(trait2_pvt) == length(tree2_pvt$tip.label))
+stopifnot(length(grp2_pvt) == length(tree2_pvt$tip.label))
+stopifnot(all(trait2_pvt$Species == tree2_pvt$tip.label))
+```
+
+
+
+```{r}
+ok_pvt = !is.na(trait2_pvt$`log Amass`) & !is.na(grp2_pvt)
+
+df_pvt = data.frame(
+  y = trait2_pvt$`log Amass`[ok_pvt],
+  pvt = droplevels(grp2_pvt[ok_pvt]),
+  row.names = tree2_pvt$tip.label[ok_pvt]
+)
+
+tree_ok_amass = drop.tip(tree2_pvt, setdiff(tree2_pvt$tip.label, rownames(df_pvt)))
+tree_ok_amass$root.edge = 0
+stopifnot(all(tree_ok_amass$tip.label == rownames(df_pvt)))
+
+m_Amass = phylolm(y ~ pvt, data = df_pvt, phy = tree_ok_amass, model = "lambda")
+summary(m_Amass)
+
+```
+
+
+
+
+
+```{r}
+ok_pvt = !is.na(trait2_pvt$`log LMA`) & !is.na(grp2_pvt)
+
+
+df_pvt_LMA = data.frame(
+  y   = trait2_pvt$`log LMA`[ok_pvt],
+  pvt = droplevels(grp2_pvt[ok_pvt]),
+  row.names = tree2_pvt$tip.label[ok_pvt]
+)
+
+
+tree_ok_LMA_pvt = drop.tip(tree2_pvt, setdiff(tree2_pvt$tip.label, rownames(df_pvt_LMA)))
+tree_ok_LMA_pvt$root.edge = 0
+stopifnot(all(tree_ok_LMA_pvt$tip.label == rownames(df_pvt_LMA)))
+
+
+m_LMA_pvt = phylolm(
+  y ~ pvt,
+  data  = df_pvt_LMA,
+  phy   = tree_ok_LMA_pvt,
+  model = "lambda"
+)
+
+summary(m_LMA_pvt)
+```
+
+
+```{r}
+
+ok_pvt = !is.na(trait2_pvt$`log Nmass`) & !is.na(grp2_pvt)
+
+
+df_pvt_Nmass = data.frame(
+  y   = trait2_pvt$`log Nmass`[ok_pvt],
+  pvt = droplevels(grp2_pvt[ok_pvt]),
+  row.names = tree2_pvt$tip.label[ok_pvt]
+)
+
+
+tree_ok_Nmass_pvt = drop.tip(tree2_pvt, setdiff(tree2_pvt$tip.label, rownames(df_pvt_Nmass)))
+tree_ok_Nmass_pvt$root.edge = 0
+stopifnot(all(tree_ok_Nmass_pvt$tip.label == rownames(df_pvt_Nmass)))
+
+
+m_Nmass_pvt = phylolm(
+  y ~ pvt,
+  data  = df_pvt_Nmass,
+  phy   = tree_ok_Nmass_pvt,
+  model = "lambda"
+)
+
+summary(m_Nmass_pvt)
+
+```
+Pour le primary vein type, nous avons appliqué exactement la même démarche méthodologique que pour le secondary vein type. À partir de l’arbre phylogénétique correspondant (tree_pvt) et des données de traits fonctionnels (log A_mass, log LMA et log N_mass), les noms d’espèces ont d’abord été harmonisés afin d’assurer une correspondance exacte entre l’arbre et la table de données. Les espèces présentant des valeurs manquantes ont ensuite été exclues, puis l’arbre a été élagué pour ne conserver que les espèces communes aux deux jeux de données. Sur cet ensemble cohérent, nous avons ajusté des modèles linéaires phylogénétiques (phyloLM avec estimation du paramètre λ) afin de tester l’effet du type de nervure primaire sur chacun des traits étudiés. 
+Les coefficients et leurs p-values décrivent des contrastes par rapport à une catégorie de référence, mais ne constituent pas en eux-mêmes une ANOVA phylogénétique globale. L’évaluation formelle de l’effet du facteur de nervation repose sur le calcul ultérieur de la statistique de test ANOVA (statistique F), qui sera présentée dans la section suivante.
+
+```{r}
+phylo_F_gls = function(y, grp, tree, lambda = NULL) {
+
+  stopifnot(length(y) == length(grp))
+  stopifnot(length(y) == length(tree$tip.label))
+
+  
+  V0 = vcv(tree)
+
+
+  if (!is.null(lambda)) {
+    V = V0
+    off = row(V) != col(V)
+    V[off] = lambda * V0[off]
+  } else {
+    V = V0
+  }
+
+  Vinv = solve(V)
+
+  y = as.numeric(y)
+  n = length(y)
+  grp = droplevels(as.factor(grp))
+  K = nlevels(grp)
+
+  
+  X  = model.matrix(~ grp)
+  X0 = matrix(1, n, 1)  
+
+  
+  beta  = solve(t(X)  %*% Vinv %*% X)  %*% (t(X)  %*% Vinv %*% y)
+  beta0 = solve(t(X0) %*% Vinv %*% X0) %*% (t(X0) %*% Vinv %*% y)
+
+  yhat  = as.vector(X  %*% beta)
+  ybar  = as.vector(X0 %*% beta0)
+
+  
+  SSR = as.numeric(t(y - yhat) %*% Vinv %*% (y - yhat))
+  SSC = as.numeric(t(yhat - ybar) %*% Vinv %*% (yhat - ybar))
+
+  df1 = K - 1
+  df2 = n - K
+
+  F = (SSC/df1) / (SSR/df2)
+  p = pf(F, df1, df2, lower.tail = FALSE)
+
+  list(F = F, p_value = p, SSC = SSC, SSR = SSR, df1 = df1, df2 = df2, n = n, K = K)
+}
+```
+
+```{r}
+resF_LLS = phylo_F_gls(
+  y = df$y,
+  grp = df$sec,
+  tree = tree_ok,
+  lambda = 0.9490888  
+)
+
+resF_LLS$F
+resF_LLS$p_value
+```
+
+```{r}
+resF_LMA = phylo_F_gls(
+  y = df_lma$y,
+  grp = df_lma$sec,
+  tree = tree_ok_lma,
+  lambda = summary(m_LMA)$lambda
+)
+resF_LMA$p_value
+```
+
+```{r}
+resF_nmass = phylo_F_gls(
+  y = df_nmass$y,
+  grp = df_nmass$sec,
+  tree = tree_ok_nmass,
+  lambda = summary(m_Nmass)$lambda)
+resF_nmass$p_value
+```
+```{r}
+resF_amass = phylo_F_gls(
+  y = df_pvt$y,
+  grp = df_pvt$pvt,
+  tree = tree_ok_amass,
+  lambda = summary(m_Amass)$lambda
+)
+resF_amass$p_value
+```
+
+```{r}
+resF_lma_pvt = phylo_F_gls(
+  y = df_pvt_LMA$y,
+  grp = df_pvt_LMA$pvt,
+  tree = tree_ok_LMA_pvt,
+  lambda = summary(m_LMA_pvt)$lambda
+)
+resF_lma_pvt$p_value
+```
+
+```{r}
+resF_nmass_pvt = phylo_F_gls(
+  y = df_pvt_Nmass$y,
+  grp = df_pvt_Nmass$pvt,
+  tree = tree_ok_Nmass_pvt,
+  lambda = summary(m_Nmass_pvt)$lambda
+)
+resF_nmass_pvt$p_value
+```
+la statistique de test a été calculée à l’aide d’une ANOVA phylogénétique basée sur les sommes des carrés corrigées par la matrice de variance–covariance issue de l’arbre (fonction phylo_F_gls).
+
+Les résultats obtenus montrent des effets significatifs du type de nervation secondaire sur LLS, LMA et Nmass, comme pour les resultats de l'article.
+Ils montrent aussi  dans notre cas, un effet significatif du type de nervure primaire sur les traits fonctionnels étudiés (A_mass, LMA et N_mass), contrairement aux résultats rapportés dans l’article, où cet effet n’est pas significatif après correction phylogénétique. Cette différence peut s’expliquer par plusieurs facteurs. D’une part, le filtrage des données et l’élagage de l’arbre ont conduit à la perte de plus de vingt espèces par rapport aux effectifs utilisés dans l’étude originale, ce qui peut modifier la puissance statistique et l’estimation des effets. D’autre part, les méthodes employées ne sont pas strictement identiques : l’article s’appuie sur des ANOVA phylogénétiques basées sur des simulations, tandis que notre approche repose sur des modèles GLS phylogénétiques avec estimation du paramètre λ. Ces différences méthodologiques et d’échantillonnage peuvent conduire à des conclusions divergentes quant à la significativité des nervures primaires.

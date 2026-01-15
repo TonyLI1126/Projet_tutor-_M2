@@ -1,6 +1,6 @@
 ---
 title: "PROJET TUTORE M2"
-format: html
+format: pdf
 editor: visual
 author: Tony LI - Saïd BENAISSA
 ---
@@ -17,6 +17,8 @@ library(phytools)
 library(dplyr)
 library(purrr)
 library(ggplot2)
+library(here)
+library(microbenchmark)
 
 
 n_tips = 5  # nombre d'espèces terminales
@@ -102,11 +104,13 @@ Le mouvement brownien est un processus stochastique fondamental servant de modè
 
 On appelle mouvement brownien standard $((B_t)_{t \ge 0})$ le processus stochastique tel que :
 
+$$
 \begin{cases}
 B_0 = 0,\\[4pt]
 B_t - B_s \sim \mathcal{N}(0, t-s), \quad \text{pour } 0 \le s < t,\\[4pt]
 \text{les accroissements sont indépendants.}
 \end{cases}
+$$
 
 ## Covariance sous mouvement brownien sur un arbre
 
@@ -463,6 +467,8 @@ abs(betafor - betatpackage)
 all.equal(betafor,betatpackage , check.attributes = FALSE)
 
 ```
+Cette vérification montre que le coefficient estimé par notre implémentation est numériquement identique à celui obtenu via le package utilisé .
+
 
 ```{r}
 microbenchmark(phylolm(y ~ x, phy = tree))
@@ -472,7 +478,6 @@ microbenchmark(phylolm(y ~ x, phy = tree))
 microbenchmark(betahat)
 ```
 
-on compare le beta avec le coefficient du package et on voit que c'est le meme car leur différence est tres proche de 0
 
 estimation de sigma\^2 par la formule
 
@@ -540,15 +545,15 @@ coverage = 0
 
 for(i in 1:100){
 
-  # arbre phylogénétique simulé
+  
   tree <- rphylo(m, 1, 1)
 
-  # simulateur covariable
+ 
   x = rnorm(m)
   X = cbind(1, x)
   rownames(X) <- tree$tip.label
 
-  # bruit brownien (phylogénétique)
+
   eps = rTrait(
     n = 1,
     phy = tree,
@@ -556,26 +561,26 @@ for(i in 1:100){
     parameters = list(ancestral.state = 0, sigma2 = sigmat)
   )
 
-  # variable réponse
+  
   y = X %*% betat + eps
   names(y) = tree$tip.label
 
-  # données pour phylolm
+ 
   dat = data.frame(y = y, x = x)
   rownames(dat) = tree$tip.label
 
-  # estimation complète via phylolm
+  
   fit = phylolm(y ~ x, phy = tree, data = dat)
 
-  # récupère beta chapeau et erreur standard
+ 
   bhat   = coef(fit)[2]
   se     = summary(fit)$coefficients[2,2]
 
-  # intervalle de confiance
+  
   lowerbeta = bhat - qt(1-alpha/2, df = m-2) * se
   upperbeta = bhat + qt(1-alpha/2, df = m-2) * se
 
-  # couverture
+  
   if (betat[2] >= lowerbeta && betat[2] <= upperbeta) {
     coverage = coverage + 1
   }
@@ -584,11 +589,14 @@ for(i in 1:100){
 coverage
 
 ```
+Cette simulation évalue la couverture empirique de l’intervalle de confiance à 95% on a que nos intervalle contient BETA dans presque 95 % des cas . On peut parfois  apercevoir une légere entre la valeur observé et la valeur attendu qui doit etre 95 cela peut etre du a notre faible échantillon qui est seulement de 100 intervalles 
 
-on utilise la fonction rtraitcont pour simuler le vecteur des feuilles sans les trajectoire
+
+
+On utilise la fonction rtraitcont pour simuler le vecteur des feuilles sans les trajectoire
 
 ```{r}
-?rTraitCont
+
 set.seed(1)
 n =20
 tree = rphylo(n, birth = 1, death = 0.1)
@@ -601,7 +609,8 @@ feuilles
 
 ```
 
-étude de simulation on réalise une étude de simulation ou on compare l'estimation de béta pour des donnée classique entre la régression classique et la régression phylogénétique on doit normalement s'attendre a ce que la régression classique estime mieux le béta que la régression phylogénétique
+Étude de simulation.
+Nous réalisons une étude de simulation visant à comparer l’estimation du paramètre β obtenue à partir de données indépendantes en utilisant, d’une part, une régression linéaire classique et, d’autre part, une régression phylogénétique. Dans ce cadre, on s’attend à ce que la régression linéaire classique fournisse une estimation plus précise de β, tandis que la régression phylogénétique, conçue pour corriger la dépendance induite par la structure phylogénétique, peut présenter une variance plus élevée lorsque cette dépendance est absente ou faible.
 
 ```{r}
 
@@ -610,15 +619,15 @@ rmse <- function(est, true) sqrt(mean((est - true)^2))
 
 
 n = 50
-B = c(1, 5)               # beta0, beta1
+B = c(1, 5)               
 sigma2 = 4
 Nsim = 100
 
-# stocker les beta0 et beta1
+
 reslm      = matrix(0, Nsim, 2)
 resphylo   = matrix(0, Nsim, 2)
 
-# stocker la couverture
+
 cover_lm      = rep(0, 2)
 cover_phylo   = rep(0, 2)
 
@@ -630,18 +639,18 @@ for(i in 1:Nsim){
   e = rnorm(n, 0, sqrt(sigma2))
   y = X %*% B + e
 
-  # Fit LM
+  
   cfit = lm(y ~ x)
   reslm[i, ] = coef(cfit)
 
-  # IC pour LM
+
   se_lm = summary(cfit)$coefficients[,2]
   lower_lm = coef(cfit) - qt(1-alpha/2, n-2) * se_lm
   upper_lm = coef(cfit) + qt(1-alpha/2, n-2) * se_lm
 
   cover_lm = cover_lm + (B >= lower_lm & B <= upper_lm)
 
-  # 2) Données phylogénétiques
+
 
   tree = rphylo(n, 0.5, 0.5)
 
@@ -651,7 +660,7 @@ for(i in 1:Nsim){
   phfit = phylolm(y ~ x, phy = tree, data = dat)
   resphylo[i, ] = coef(phfit)
 
-  # IC phylolm
+ 
   se_phy = summary(phfit)$coefficients[,2]
   lower_phy = coef(phfit) - qt(1-alpha/2, n-2) * se_phy
   upper_phy = coef(phfit) + qt(1-alpha/2, n-2) * se_phy
@@ -692,20 +701,19 @@ on a bien que le modele classique estime mieux que le modele phylogénétique - 
 set.seed(123)
 
 n = 50
-B = c(1, 5)             # beta0, beta1
+B = c(1, 5)           
 sigma2 = 2
 alpha = 0.05
 Nsim = 100
 
-# stockage des coefficients estimés
-reslm      <- matrix(0, Nsim, 2)   # beta0 , beta1
+reslm      <- matrix(0, Nsim, 2)   
 resphylo   <- matrix(0, Nsim, 2)
 
-# couverture
+
 cover_lm      <- rep(0, 2)
 cover_phylo   <- rep(0, 2)
 
-# fonction RMSE
+
 rmse <- function(est, true) sqrt(mean((est - true)^2))
 
 for(i in 1:Nsim){
@@ -727,7 +735,7 @@ for(i in 1:Nsim){
   coef_lm = coef(fit_lm)
   reslm[i, ] = coef_lm
 
-  # IC LM
+  
   se_lm = summary(fit_lm)$coefficients[,2]
   lower_lm = coef_lm - qt(1-alpha/2, df = n-2) * se_lm
   upper_lm = coef_lm + qt(1-alpha/2, df = n-2) * se_lm
@@ -741,7 +749,7 @@ for(i in 1:Nsim){
   coef_phy = coef(fit_phy)
   resphylo[i, ] = coef_phy
 
-  # IC phylolm
+  
   se_phy = summary(fit_phy)$coefficients[,2]
   lower_phy = coef_phy - qt(1-alpha/2, df = n-2) * se_phy
   upper_phy = coef_phy + qt(1-alpha/2, df = n-2) * se_phy
@@ -772,247 +780,545 @@ cat("phylolm beta1  :", abs(B[2] - mean(resphylo[,2])), "\n")
 
 Quand les erreurs suivent un MB sur l'arbre (présence de structure phylogénétique) ==\> modèle phylolm qui est meilleur (correct).
 
-## ANOVA classique
+```{r}
+library(here)
 
-On considère (K) groupes, chacun avec (n_k) observations.
+```
 
-Le modèle classique est :
+---
+title: "PROJET"
+format: pdf
+editor: visual
+author: Tony LI - Saïd BENAISSA
+---
 
-$$
-y_{ki} = \mu_k + \sigma \varepsilon_{ik},
-\qquad
-\varepsilon_{ik} \sim \mathcal N(0,1).
-$$
 
-L’hypothèse nulle d’ANOVA est :
+## ANOVA classique et ANOVA phylogénétique
 
-$$
-H_0 : \mu_1 = \mu_2 = \cdots = \mu_K
-\qquad \text{vs} \qquad
-H_1 : \exists k,\ell \; \mu_k \ne \mu_\ell.
-$$
+On commence par rappeler l’ANOVA non phylogénétique, où les observations sont indépendantes.
 
-En prenant le groupe 1 comme référence, on réécrit :
 
-$$
-y_{ki} = \mu_1 + \beta_k + \sigma \varepsilon_{ik},
-\qquad
-\beta_1 = 0.
-$$
+## ANOVA classique (erreurs indépendantes)
 
-En notation matricielle :
+Le modèle est :
 
 $$
 y = X\beta + \sigma \varepsilon,
 \qquad
-\varepsilon \sim \mathcal N(0, I_n).
+\varepsilon \sim \mathcal N(0, I).
 $$
 
-La statistique de Fisher classique est :
+Dans ce cas, les sommes des carrés sont :
+
+-   Somme des carrés expliquée :
 
 $$
-F = 
-\frac{\| \hat y - \bar y \|^2 / (K - 1)}
-     {\| y - \hat y \|^2 / (n - K)}
-\sim F_{K-1,\; n-K} \quad \text{sous } H_0.
+SSC = \|\hat y - \bar y\|^2.
 $$
 
-## ANOVA phylogénétique
-
-Les données sont corrélées selon un arbre phylogénétique.\
-On suppose maintenant :
+-   Somme des carrés résiduels :
 
 $$
-E \sim \mathcal N(0, C),
+SSR = \|y - \hat y\|^2.
 $$
 
-où (V) est la matrice de covariance phylogénétique (ex : Brownian Motion).
+La statistique F classique est :
 
-Le modèle devient :
+$$
+F =
+\frac{SSC/(K-1)}{SSR/(n-K)},
+\qquad
+F \sim F_{K-1,\,n-K}
+\quad \text{sous } H_0.
+$$
+
+
+# ANOVA phylogénétique
+
+On part maintenant du modèle phylogénétique :
 
 $$
 y = X\beta + \sigma E,
 \qquad
-E \sim \mathcal N(0, C).
+E \sim \mathcal N(0, C),
 $$
 
-Donc :
+où (C) est la matrice de covariance issue de l’arbre (exemple : Brownian Motion).
+
+
+## 1. Objectif
+
+Revenir à un modèle avec erreurs indépendantes pour utiliser la même statistique F que dans l’ANOVA classique
+
+
+## 2. Décomposition de Cholesky
+
+Comme (C) est symétrique définie positive :
 
 $$
-y \sim \mathcal N(X\beta, \sigma^2 C).
+C = LL^\top,
 $$
 
-L’estimateur des moindres carrés généralisés (GLS) est :
+où $L$ est triangulaire inférieure et inversible.
+
+
+
+## 3. Transformation
+On transforme les données :
 
 $$
-\hat\beta_{GLS}
-=
-\big( X^\top C^{-1} X \big)^{-1}
-X^\top C^{-1} y.
+y^* = L^{-1}y, \qquad X^* = L^{-1}X,
 $$
 
-On teste toujours :
+et les erreurs :
 
 $$
-H_0 : \beta_2 = \cdots = \beta_K = 0.
+E^* = L^{-1}E.
 $$
 
-SOMMES DES CARRÉS PHYLOGÉNÉTIQUES
-
-Somme des carrés expliquée (SSC) :
+Comme
 
 $$
-\text{SSC}_{phylo}
-=
-(\hat y - \bar y)^\top C^{-1} (\hat y - \bar y)
-=
-\|\hat y - \bar y\|_{C^{-1}}^2.
+E \sim \mathcal N(0, C = LL^\top),
 $$
 
-Somme des carrés résiduelle (SSR) :
+on obtient :
 
 $$
-\text{SSR}_{phylo}
-=
-(y - \hat y)^\top C^{-1} (y - \hat y)
-=
-\|y - \hat y\|_{C^{-1}}^2.
+E^{*} = L^{-1}E \sim \mathcal{N}(0, I).
 $$
 
-Donc la statistique de test est :
+
+## 4. Modèle transformé
+
+On obtient exactement un modèle classique :
+
+$$
+y^* = X^*\beta + \sigma E^*,
+\qquad
+E^* \sim \mathcal N(0, I),
+$$
+
+donc les outils de l’ANOVA standard s’appliquent directement.
+
+## 5. Sommes des carrés dans l’espace transformé
+
+Somme des carrés résiduels :
+
+$$
+SSR^* = \|y^* - \hat y^*\|^2.
+$$
+
+Somme des carrés expliqués :
+
+$$
+SSC^* = \|\hat y^* - \bar y^*\|^2.
+$$
+
+Statistique F classique :
+
+$$
+F^* =
+\frac{SSC^*/(K-1)}{SSR^*/(n-K)}.
+$$
+
+
+## 6. Revenir aux données originales : norme pondérée (C\^{-1})
+
+Comme
+
+$$
+y^* = L^{-1}y,
+$$
+
+alors :
+
+$$
+\|y^* - \hat y^*\|^2
+= (y - \hat y)^\top (L^{-1})^\top L^{-1}(y - \hat y)
+= (y - \hat y)^\top C^{-1}(y - \hat y).
+$$
+
+D’où la somme des carrés résiduelle phylogénétique :
+
+$$
+SSR_{\text{phylo}}
+= (y - \hat y)^\top C^{-1}(y - \hat y).
+$$
+
+Et :
+
+$$
+SSC_{\text{phylo}}
+= (\hat y - \bar y)^\top C^{-1}(\hat y - \bar y).
+$$
+
+## 7. Statistique F phylogénétique
+
+Elle est donc :
 
 $$
 F =
-\frac{\| \hat y - \bar y \|_{C^{-1}}^2 / (K - 1)}
-     {\| y - \hat y \|_{C^{-1}}^2 / (n - K)},
-$$
-
-où :
-
-$$
-\| z \|_{C^{-1}}^2 = z^\top C^{-1} z.
+\frac{SSC_{\text{phylo}}/(K-1)}
+     {SSR_{\text{phylo}}/(n-K)}.
 $$
 
 Sous l’hypothèse nulle :
 
 $$
-F \sim F_{K-1,\; n-K}.
+F \sim F_{K-1,\,n-K}.
 $$
 
-Maintenant on va essayer de comparer l'anova classique et l'anova phylogénétique sur des données phylogénétique on devrait normalement avoir une erreur de premiere espece supérieur a 0.05 pour le modele d'anova classique car ce n'est pas le modele adéquate aux données phylogénétique.
+La transformation n’ayant changé ni les degrés de liberté ni la forme du test, la loi F est identique à celle de l’ANOVA classique.
 
-Comparaison ANOVA classique vs phylogénétique
 
-Nous illustrons maintenant la différence entre une ANOVA classique (qui suppose des erreurs indépendantes) et une ANOVA phylogénétique adaptée aux données corrélées selon un arbre.
 
-Taux d'erreur de première espèce sous $H_0$ (pas de différence entre groupes):
 
-On simule un arbre avec 8 feuilles et deux groupes de taille égale. Sous l'hypothèse nulle $\delta = 0$ on calcule la proportion de rejets de $H_0$ pour le modèle classique et pour le modèle phylogénétique.
+Maintenant on va essayer de comparer l'anova classique et l'anova phylogénétique sur des données phylogénétique  
 
 ```{r}
-set.seed(123)
-
-n = 8                # 8 feuilles
-B0 = 2               # moyenne commune sous H0
-sigma2 = 1           # variance du BM
-nsim = 500           # nombre de simulations
-
-rej_lm = 0           # compteur des rejets H0 sous lm
-rej_phylo = 0        # pour comparaison
-
-for(sim in 1:nsim){
-
-  # 1) Simuler un arbre avec 8 feuilles
-  tree = rtree(n)
-
-  # 2) Bruit phylogénétique (BM)
-  eps = rTrait(
-    n = 1, phy = tree, model = "BM",
-    parameters = list(ancestral.state = 0, sigma2 = sigma2)
-  )
-
-  # 3) On définit 2 groupes (4 premiere et 4 dernieres)
-  group = factor(c(rep(1,4), rep(2,4)))
-  names(group) = tree$tip.label
-
-  # 4) Modèle sous H0 : mêmes moyennes
-  y = B0 + eps
-  names(y) = tree$tip.label
-
-  # 5) ANOVA classique (lm)
-  fit_lm = lm(y ~ group)
-  p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
-
-  if(p_lm < 0.05) rej_lm <- rej_lm + 1
-
-  # 6) ANOVA phylogénétique (phylolm)
-  dat = data.frame(y = y, group = group)
-  fit_phylo = phylolm(y ~ group, phy = tree, data = dat)
-  p_phylo = summary(fit_phylo)$coefficients["group2","p.value"]
-
-  if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
-}
-
-cat("\n TAUX D’ERREUR DE TYPE I\n")
-cat("ANOVA classique (lm)      :", rej_lm/nsim*100, "%\n")
-cat("ANOVA phylogénétique      :", rej_phylo/nsim*100, "%\n")
+library(ape)
+library(phylolm)
+library(here)
 ```
-
-\
-nous avons ici une erreur de premiere espece pour le modele classique a 18.2 % qui est bien supérieure a 5% et qui montre que ce modele n'est pas adapter pour les données de ce type alors que l'erreur de premiere espece de l'anova phylogénétique bien proche de 5% comme attendue
-
-Puissance quand $H_1$ est vraie (effet de groupe non nul)
-
-On fixe maintenant un écart $\delta = 1$ entre les deux groupes pour mesurer la puissance des deux approches.
 
 ```{r}
-set.seed(123)
-
-n = 8
-B0 = 2
-sigma2 = 1
-nsim = 500
-delta = 1     # différence entre les groupes -> H1 vraie
-
-rej_lm = 0
-rej_phylo = 0
-
-for(sim in 1:nsim){
-
-  # 1) Arbre
-  tree = rtree(n)
-
-  # 2) Bruit BM
-  eps = rTrait(
-    n = 1, phy = tree, model = "BM",
-    parameters = list(ancestral.state = 0, sigma2 = sigma2)
-  )
-
-  # 3) Deux groupes
-  group = factor(c(rep(1,4), rep(2,4)))
-  names(group) = tree$tip.label
-
-  # 4) Modèle H1 : moyennes différentes
-  y = B0 + delta*(group == 2) + eps
-  names(y) = tree$tip.label
-
-  # 5) ANOVA classique
-  fit_lm = lm(y ~ group)
-  p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
-  if(p_lm < 0.05) rej_lm <- rej_lm + 1
-
-  # 6) ANOVA phylogénétique
-  dat = data.frame(y = y, group = group)
-  fit_phylo = phylolm(y ~ group, phy = tree, data = dat)
-  p_phylo = summary(fit_phylo)$coefficients["group2","p.value"]
-  if(p_phylo < 0.05) rej_phylo <- rej_phylo + 1
-}
-
-cat("\n PUISSANCE (delta ≠ 0) \n")
-cat("ANOVA classique (lm)      :", rej_lm/nsim*100, "%\n")
-cat("ANOVA phylogénétique      :", rej_phylo/nsim*100, "%\n")
+i_am("projet_tutoré_rapport.qmd")
 ```
 
-Sous l'hypothèse que delta = 1, on a que la puissance de l'ANOVA classique est plus grande que l'ANOVA phylogénétique. Mais cette valeur est "fausse" car déjà sous H0 ce modèle avait un taux d'erreur de 18%. Le modèle était déjà mal calibré à la base, ce qui mène à une puissance faussée.
 
-La puissance pour l'ANOVA phylogénétique est plus juste et reflète vraiment la puissance.
+```{r}
+here::here()
+```
+
+```{r}
+
+```
+
+
+```{r}
+  tree_emp = read.nexus(here("arbre", "ajb20244-sup-0001.txt"))
+```
+
+```{r}
+class(tree_emp)
+```
+
+
+
+```{r}
+
+set.seed(888)
+
+sigma2 = 1        # variance du BM
+nsim = 500        # nombre de simulations
+B0 = 2            # moyenne sous H0
+tree_emp$root.edge = NULL
+
+n = length(tree_emp$tip.label) 
+
+
+calc_type1 = function(group){
+
+  rej_lm = 0
+  rej_phylo = 0
+
+  for(sim in 1:nsim){
+
+    # 1) Simuler bruit BM sur l'arbre fixé
+    eps = rTrait(
+      n = 1, phy = tree_emp, model = "BM",
+      parameters = list(ancestral.state = 0, sigma2 = sigma2)
+    )
+
+    eps = eps[tree_emp$tip.label]
+
+    # 2) modèle sous H0
+    y = B0 + eps
+    names(y) = tree_emp$tip.label
+
+    # 3) ANOVA classique
+    fit_lm = lm(y ~ group)
+    p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
+    if(p_lm < 0.05) rej_lm = rej_lm + 1
+
+    # 4) ANOVA phylogénétique
+    dat = data.frame(y = y, group = group)
+    fit_phylo = phylolm(y ~ group, phy = tree_emp, data = dat)
+    p_phylo = summary(fit_phylo)$coefficients["group2", "p.value"]
+    if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
+  }
+
+  return(c(
+    lm = rej_lm/nsim * 100,
+    phylo = rej_phylo/nsim * 100
+  ))
+}
+
+
+#groupe cladé
+
+tree <- tree_emp
+n <- length(tree$tip.label)
+
+# tous les nœuds internes
+internal_nodes <- (n + 1):(n + tree$Nnode)
+
+# nombre de descendants pour chaque nœud
+n_desc <- sapply(internal_nodes, function(node) {
+  length(extract.clade(tree, node)$tip.label)
+})
+
+# nœud le plus proche de n/2
+target_node <- internal_nodes[which.min(abs(n_desc - n/2))]
+tips_clade <- extract.clade(tree, target_node)$tip.label
+
+# initialisation
+group_clade <- rep(2, n)
+names(group_clade) <- tree$tip.label
+
+# clade = groupe 1
+group_clade[tips_clade] <- 1
+
+group_clade <- factor(group_clade)
+
+# groupe alterné
+
+group_alt = factor(rep(c(1,2), length.out = n))
+names(group_alt) = tree_emp$tip.label
+
+#groupe aléatoire
+set.seed(888)
+group_rand = factor(sample(c(1,2), n, replace = TRUE))
+names(group_rand) = tree_emp$tip.label
+
+
+#calcul erreur de type I
+
+res_clade = calc_type1(group_clade)
+res_alt   = calc_type1(group_alt)
+res_rand  = calc_type1(group_rand)
+
+#tableau final
+results = rbind(
+  Clade     = res_clade,
+  Alterné   = res_alt,
+  Aléatoire = res_rand
+)
+
+print("ERREUR DE TYPE I (%)")
+print(round(results, 2))
+
+
+```
+Cas Clades
+lorsque qu'on répartie les groupes en clades chaque groupe a des valeurs corréllé entre elles mais entre groupe les moyennes sont différentes c'est pour cela que l'anova classique qui ne tient pas comptent des corrélations se trompent beaucoup plus que le modele phylogénétique qui est proche de 5 %
+
+Cas alterné 
+avec la répartitions alterné chaque voisin on des groupes différents et comme l'anova classique ne dectecte pas les correlation entre groupe elle ne detecte aucune différence et donc son erreur est égale a 0 contrairement au donné phylogénétique  qui a une erreur proche de 5¨%
+
+Cas random:
+du fait de la randomisation on peut considérer comme un mélange des deux cas précédent ce qui fait que l'anova classique a toujours une erreur un peu plus haute que prévu car ce n'est pas le modele adéquate alors que le modele phylogénétique a une erreur proche de 5 %
+
+```{r}
+cols = c("red", "blue")[group_clade]
+plot(ladderize(tree_emp), tip.color = cols, cex = 0.4)
+```
+
+
+
+```{r}
+cols_alt = c("red", "blue")[group_alt]
+plot(ladderize(tree_emp), tip.color = cols_alt, cex = 0.4)
+```
+
+```{r}
+cols_rand = c("red", "blue")[group_rand]
+plot(ladderize(tree_emp), tip.color = cols_rand, cex = 0.4)
+```
+
+
+
+
+
+```{r}
+sigma2 = 1        # variance du BM
+nsim = 500        # nombre de simulations
+B0 = 2            # baseline
+delta = 1         # effet du groupe 2 
+tree_emp$root.edge = NULL
+
+n = length(tree_emp$tip.label) 
+
+
+
+# Fonction PUISSANCE
+
+
+calc_puissance = function(group){
+
+  rej_lm = 0
+  rej_phylo = 0
+
+  for(sim in 1:nsim){
+
+    # 1) Bruit BM sur arbre fixe
+    eps = rTrait(
+      n = 1, phy = tree_emp, model = "BM",
+      parameters = list(ancestral.state = 0, sigma2 = sigma2)
+    )
+
+    eps = eps[tree_emp$tip.label]
+
+    # 2) Modèle sous H1 : groupe 2 a un effet delta
+    y = B0 + delta*(group == 2) + eps
+    names(y) = tree_emp$tip.label
+
+    # 3) ANOVA classique
+    fit_lm = lm(y ~ group)
+    p_lm = summary(aov(fit_lm))[[1]][["Pr(>F)"]][1]
+    if(p_lm < 0.05) rej_lm = rej_lm + 1
+
+    # 4) ANOVA phylogénétique
+    dat = data.frame(y = y, group = group)
+    fit_phylo = phylolm(y ~ group, phy = tree_emp, data = dat)
+    p_phylo = summary(fit_phylo)$coefficients["group2", "p.value"]
+    if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
+  }
+
+  return(c(
+    lm = rej_lm/nsim * 100,
+    phylo = rej_phylo/nsim * 100
+  ))
+}
+
+
+
+
+
+tree <- tree_emp
+n <- length(tree$tip.label)
+
+# tous les nœuds internes
+internal_nodes <- (n + 1):(n + tree$Nnode)
+
+# nombre de descendants pour chaque nœud
+n_desc <- sapply(internal_nodes, function(node) {
+  length(extract.clade(tree, node)$tip.label)
+})
+
+# nœud le plus proche de n/2
+target_node <- internal_nodes[which.min(abs(n_desc - n/2))]
+tips_clade <- extract.clade(tree, target_node)$tip.label
+
+# initialisation
+group_clade <- rep(2, n)
+names(group_clade) <- tree$tip.label
+
+# clade = groupe 1
+group_clade[tips_clade] <- 1
+
+group_clade <- factor(group_clade)
+
+
+# Groupe alterné 
+group_alt = factor(rep(c(1,2), length.out = n))
+names(group_alt) = tree_emp$tip.label
+
+# Groupe aléatoire
+set.seed(888)
+group_rand = factor(sample(c(1,2), n, replace = TRUE))
+names(group_rand) = tree_emp$tip.label
+
+
+
+# Calcul de la PUISSANCE
+
+
+res_clade = calc_puissance(group_clade)
+res_alt   = calc_puissance(group_alt)
+res_rand  = calc_puissance(group_rand)
+
+# Tableau final
+results = rbind(
+  Clade     = res_clade,
+  Alterné   = res_alt,
+  Aléatoire = res_rand
+)
+
+print("PUISSANCE (%)")
+print(round(results, 2))
+```
+
+delta = 1 
+cas clade :
+lm détecte a une grosse puissance car comme c'est le mauvaus modele elle detecte toujours une différence car elle ignore la corrélation
+pour phylom du a la variance tres grande entre les clades . il ne détecte pas bien  l'effet du groupe 2  . 
+
+cas alterné :
+le modele classique ne détecte presque pas l'effet du groupe 2 contrairement au modele phylogénétique avec une puissance de 86%
+
+cas: aleatoire :
+du fait de l'aléatoire on a que le modele phylogénétique est un peu moins puissant que lorsque que lors du cas alterné mais garde quand meme une bonne puissance
+
+
+
+
+
+
+
+```{r}
+calc_puissance_phylo = function(delta){
+
+  rej_phylo = 0
+
+  for(sim in 1:nsim){
+
+    # Bruit BM
+    eps = rTrait(
+      n = 1, phy = tree_emp, model = "BM",
+      parameters = list(ancestral.state = 0, sigma2 = sigma2)
+    )
+    eps = eps[tree_emp$tip.label]
+
+    # Modèle sous H1
+    y = B0 + delta*(group_clade == 2) + eps
+    names(y) = tree_emp$tip.label
+
+    # ANOVA phylogénétique
+    dat = data.frame(y = y, group = group_clade)
+    fit_phylo = phylolm(y ~ group, phy = tree_emp, data = dat)
+
+    p_phylo = summary(fit_phylo)$coefficients["group2", "p.value"]
+
+    if(p_phylo < 0.05) rej_phylo = rej_phylo + 1
+  }
+
+  return(rej_phylo / nsim)
+}
+delta_grid = seq(0, 20, by = 2)
+puissance_phylo = sapply(delta_grid, calc_puissance_phylo)
+
+results = data.frame(
+  delta = delta_grid,
+  puissance_phylo = puissance_phylo
+)
+
+print(results)
+
+
+```
+
+```{r}
+plot(
+  delta_grid, puissance_phylo,
+  type = "b", pch = 19,
+  xlab = expression(delta),
+  ylab = "Puissance (ANOVA phylogénétique)",
+  ylim = c(0,1)
+)
+
+abline(h = 0.05, lty = 2, col = "red")  # seuil erreur type I
+
+```
+
