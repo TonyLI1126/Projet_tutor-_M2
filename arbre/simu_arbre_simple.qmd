@@ -1,0 +1,112 @@
+---
+title: "simulation arbre exemple"
+format: html
+editor: visual
+---
+
+Simulation d'arbre simple pour illustrer la section 2.3 Notations et décomposition au niveau du dernier ancêtre commun
+
+```{r}
+library(ape)
+
+set.seed(123)
+
+# 1) Arbre + labels 1..5
+tree = rtree(5)
+tree$tip.label = as.character(1:5)
+
+# feuilles alignées
+tree = chronos(tree)
+
+tree = ladderize(tree, right = FALSE)
+
+# Fixer j = feuille 1
+j_tip = "1"
+root_node = Ntip(tree) + 1
+
+# Choisir automatiquement i parmi les autres feuilles
+candidats = setdiff(tree$tip.label, j_tip)
+
+i_tip = NA_character_
+mrca_node = NA_integer_
+
+for (cand in candidats) {
+  m = getMRCA(tree, c(cand, j_tip))
+  if (!is.na(m) && m != root_node) {
+    i_tip = cand
+    mrca_node = m
+    break
+  }
+}
+
+if (is.na(i_tip)) {
+  stop("Impossible de trouver i tel que MRCA(i,1) != racine avec cet arbre. Change set.seed ou augmente le nombre de tips.")
+}
+
+tip_i = which(tree$tip.label == i_tip)
+tip_j = which(tree$tip.label == j_tip)
+
+#Plot (rightwards), on cache les labels pour les réécrire droits
+plot(
+  tree,
+  type = "cladogram",
+  direction = "rightwards",
+  show.tip.label = FALSE,
+  no.margin = TRUE
+)
+
+pp = get("last_plot.phylo", envir = .PlotPhyloEnv)
+
+# Labels des feuilles (droits)
+for (k in 1:Ntip(tree)) {
+  text(
+    x = pp$xx[k],
+    y = pp$yy[k],
+    labels = tree$tip.label[k],
+    pos = 4,
+    offset = 0.2,
+    cex = 1
+  )
+}
+
+# Marquer la racine explicitement (évite la confusion Z = racine)
+x_r = pp$xx[root_node]
+y_r = pp$yy[root_node]
+points(x_r, y_r, pch = 4, lwd = 2, cex = 1)
+text(x_r, y_r, labels = "racine", pos = 3, cex = 0.9, offset = 0.3)
+
+# Points Y_i / Y_1
+points(pp$xx[tip_i], pp$yy[tip_i], pch = 16, col = "red",  cex = 1)
+points(pp$xx[tip_j], pp$yy[tip_j], pch = 16, col = "blue", cex = 1)
+
+text(pp$xx[tip_i], pp$yy[tip_i], labels = bquote(Y[.(i_tip)]), pos = 3, offset = 0.7, cex = 1.3)
+text(pp$xx[tip_j], pp$yy[tip_j], labels = expression(Y[1]), pos = 3, offset = 0.2, cex = 1.3)
+
+# MRCA : point orange + label Z_{i1} (affiché comme Z[41] par ex)
+x_m = pp$xx[mrca_node]
+y_m = pp$yy[mrca_node]
+
+points(x_m, y_m, pch = 21, bg = "orange", cex = 1)
+
+lab_Z = as.expression(bquote(Z[.(paste0(i_tip, j_tip))]))
+text(x_m, y_m, labels = lab_Z, pos = 3, offset = 0.2, cex = 1.3)
+
+# Distance entre Z_{i1} (MRCA) et Y_i : (t_i - t_{i1})
+
+x_i = pp$xx[tip_i]
+y_i = pp$yy[tip_i]
+
+# Barre horizontale : de x_m (MRCA) à x_i (tip i) au niveau y_i
+segments(x0 = x_m, y0 = y_i, x1 = x_i, y1 = y_i, lwd = 2)
+
+# Petites barres aux extrémités
+cap = 0.02 * max(diff(range(pp$xx)), diff(range(pp$yy)))
+segments(x_m, y_i - cap, x_m, y_i + cap, lwd = 4)
+segments(x_i, y_i - cap, x_i, y_i + cap, lwd = 4)
+
+# Label au milieu : t_i - t_{i1} (affiché comme t[4] - t[41] par ex)
+x_mid = (x_m + x_i) / 2
+lab_ti_minus_tij = as.expression(bquote(t[.(i_tip)] - t[.(paste0(i_tip, j_tip))]))
+text(x_mid, y_i, labels = lab_ti_minus_tij, pos = 3, offset = 0.6, cex = 1.2)
+
+```
